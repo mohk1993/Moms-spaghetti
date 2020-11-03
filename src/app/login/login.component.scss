@@ -1,0 +1,163 @@
+.container-fluid{
+    font-family: 'Roboto', sans-serif;
+    background-image: url("/assets/images/RestoBackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+
+    //vh = window height, use with caution, makes shit break on tablets
+    height: 100vh;
+    //center content horizontal and vertical center
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-section{
+    margin: 0 auto;
+    margin-top: 130px;
+    padding: 0;
+}
+.modal-content{
+    box-shadow: 0px 0px 3px 2px rgba($color: #000000, $alpha: .80);
+    background-color: #434e5a;
+    opacity: .95;
+    padding: 0 18px;
+}
+.login-image{
+    
+    
+    overflow: hidden;
+    //positioning of image
+    margin-top: -2.5rem; //to step outside the box
+    padding-bottom: 6rem; //to make box bigger
+
+    //position content in horizontal center
+    display: flex; //flex is a display parameter that allows you to shift content
+    justify-content: center;
+    width: 100%;  //important since by default flex is not full width by default, therefore justofy content will not work
+
+    img {
+        //curl top right and bottom left corners by 8px, 1rem = 16px by default, 16px is the default font size on most browsers, rem is scaled from that
+        border-top-right-radius: .5rem;
+        border-top-left-radius: .1rem;
+        border-bottom-left-radius: .5rem;
+        border-bottom-right-radius: .1rem;
+        width: 40%; //declare horziontal size of image a little less than 1/3 of full width
+        height: auto; //browser makes image stick with aspect ratio, some browsers don't like to listen to this so setting it as 100% can have the same effect
+    }
+}
+
+.forgot, .sign-up {
+    color: white;
+    a {
+        color: #FF8C00;
+        &:hover {
+            color: #FF0000;
+        }
+        &:active {
+            color: black;
+        }
+    }
+}
+.anchor-separator {
+    margin: .25rem 0;
+    padding: 0;
+    width: 50%;
+    height: 1px;
+    border: none;
+    background-color: rgba($color: black, $alpha: .35);
+}
+.form-input{
+    padding: 0;
+    margin: 0;
+}
+.form-group{
+    font-size: 1.25em;
+    padding: 2px 5px;
+    text-align: center;
+    background-color: transparent;
+    &:focus{
+        animation-name: select-cover;
+        animation-duration: .8s;
+    }
+    &::placeholder{
+        color: white;
+    }
+    input{
+        &:focus{
+            outline: none;
+            outline-color:0;
+        }
+    }
+
+}
+.form-group .form-control{
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid #c5ecfd;
+    padding: 10px;
+    color: #cfecfd;
+   
+}
+.login-btn {
+    width: 40%;
+    max-width: 150px;
+    box-shadow: 2px 2px 2px 2px rgba($color: #343434, $alpha: 0.25),1px 1px 1px 1px rgba($color: #000000, $alpha: 0.25);
+    border-radius: 2px;
+    button{
+        width: 100%;
+        font-size: 1.1em;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 0 0 2px rgba($color: #90EE90, $alpha: 0.45);
+        color: rgba($color: #ffffff, $alpha: 0.65);
+        background:none;
+        transition: .6s;
+        overflow: hidden;
+        &:active{
+            outline: none;
+            outline-color: 0;
+        }
+        &::before{
+            content: '';
+            display: block;
+            background: rgba($color: #00ff00, $alpha: .5);
+            width: 35px;
+            height: 15px;
+            left: 0;
+            top: 0;
+            opacity: .5s;
+            filter: blur(30px);
+            transform: translateX(-130px)skewX(-15deg);
+        }
+        &::after{
+            content: '';
+            display: block;
+            background: rgba($color: #00ff00, $alpha: .2);
+            width: 30px;
+            height: 10px;
+            left: 30px;
+            top: 0;
+            opacity: 0;
+            filter: blur(30px);
+            transform: translate(-130px)scaleX(-15deg);
+        }
+        &:hover{
+            background: #338033;
+            cursor: pointer;
+        }
+        &:hover::before{
+            transform: translateX(300px) skewX(-15deg);
+            opacity: .6;
+            transition: .7s;
+        }
+        &:hover::after{
+            transform: translateX(300px) skewX(-15deg);
+            opacity: .1;
+            transition: .7s;
+        }
+    }
+
+
+}
