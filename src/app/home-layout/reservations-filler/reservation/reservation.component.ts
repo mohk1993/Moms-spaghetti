@@ -10,8 +10,12 @@ export class ReservationComponent {
   constructor() {}
 
   cancellation_dialog: boolean = false;
+  experience_dialog: boolean = false;
 
   openCancellation() { this.cancellation_dialog = true; }
   closeCancellation(e: boolean) { this.cancellation_dialog = false; }
 
+
+  openExperience() { this.experience_dialog = true; }
+  closeExperience(e: boolean) { this.experience_dialog = false; }
 }
