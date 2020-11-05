@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+    
+        <div class="col-12 d-flex justify-content-center">
+            <h1>Welcome to</h1>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <h4>Dish page</h4>
+        </div>
+
+        <div style="padding: 3rem 0;"></div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <h2>Navigate to</h2>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button [routerLink]="['/']" style="margin: 0 .75rem;">Main page/Home</button>
+            <button (click)="openDelete()" style="margin: 0 .75rem;">Remove dish confirmation dialog</button>
+            <button (click)="openConfirmation()" style="margin: 0 .75rem;">Update dish confirmation dialog</button>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="custom-dialog" *ngIf="update_dish_dialog">
+    <app-confirmation-dialog (close)="closeConfirmation($event)"></app-confirmation-dialog>
+</div>
+<div class="custom-dialog" *ngIf="remove_dish_dialog">
+    <app-delete-dialog (close)="closeDelete($event)"></app-delete-dialog>
+</div>

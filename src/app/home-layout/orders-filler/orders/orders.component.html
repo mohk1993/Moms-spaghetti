@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+    
+        <div class="col-12 d-flex justify-content-center">
+            <h1>Welcome to</h1>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <h4>Orders page</h4>
+        </div>
+
+        <div style="padding: 3rem 0;"></div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <h2>Navigate to</h2>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button [routerLink]="['/']" style="margin: 0 .75rem;">Main page/Home</button>
+            <button [routerLink]="['/orders/single']" style="margin: 0 .75rem;">Order page</button>
+
+            <button (click)="openCancellation()" style="margin: 0 .75rem;">Cancellation dialog</button>
+            <button (click)="openConfirmation()" style="margin: 0 .75rem;">Confirmation dialog</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="custom-dialog" *ngIf="cancellation_dialog">
+    <app-cancellation-dialog (close)="closeCancellation($event)"></app-cancellation-dialog>
+</div>
+<div class="custom-dialog" *ngIf="confirmation_dialog">
+    <app-confirmation-dialog (close)="closeConfirmation($event)"></app-confirmation-dialog>
+</div>
