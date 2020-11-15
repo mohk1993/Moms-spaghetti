@@ -20,8 +20,8 @@ export class AuthService {
     employee: Employee;
     customer: Customer;
 
-    loginSubject = new Subject<any>();
-    
+    loginSubject    = new Subject<any>();
+    logoutSubject   = new Subject<any>();
 
 
     login(email: string, password: string) {
@@ -32,6 +32,17 @@ export class AuthService {
             next: (res) => { this.loginSubject.next(res);   },
             error:  (e) => { this.loginSubject.next(e);     }
         });
+    }
+
+    logout() {
+        this.http.delete(environment.key + 'session').subscribe({
+            next: (res) => { this.logoutSubject.next(res); },
+            error:  (e) => { this.logoutSubject.next(e); }
+        });
+    }
+
+    refresh() {
+        
     }
 
 }

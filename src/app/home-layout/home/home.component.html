@@ -18,22 +18,22 @@
                 <li class="nav-item active">
                   <a class="nav-link" [routerLink]="['/deliveries']">Deliveries<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" [routerLink]="['/employees']">Employees<span class="sr-only">(current)</span></a>
+                <li class="nav-item active" *ngIf="authService.admin">
+                  <a class="nav-link" [routerLink]="['/employees']" >Employees<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link" [routerLink]="['/reviews']">Reviews<span class="sr-only">(current)</span></a>
+                <li class="nav-item active" *ngIf="authService.admin">
+                  <a class="nav-link" [routerLink]="['/reviews']" >Reviews<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item active" *ngIf="authService.admin">
                   <a class="nav-link" [routerLink]="['/profit']">profit<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                  <a class="nav-link"  [routerLink]="['/dish']">dishs<span class="sr-only">(current)</span></a>
+                <li class="nav-item active" *ngIf="authService.admin">
+                  <a class="nav-link"  [routerLink]="['/dish']">dishes<span class="sr-only">(current)</span></a>
                 </li>
               </ul>
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link-logout" [routerLink]="['/login']">Logout <span class="sr-only">(current)</span></a>
+                    <a class="nav-link-logout" (click)="logout()">Logout <span class="sr-only">(current)</span></a>
                   </li>
             </ul>
             </div>
