@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  key: 'http://moms-spaghetti.herokuapp.com/api/v1/'
 };
