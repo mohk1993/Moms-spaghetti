@@ -1,28 +1,43 @@
 <div class="container-fluid">
     <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Main page/Home</h4>
-        </div>
-
-        <div style="padding: 3rem 0;"></div>
-
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/login']" style="margin: 0 .75rem;">Logout</button>
-            <button [routerLink]="['/orders']" style="margin: 0 .75rem;">Orders page</button>
-            <button [routerLink]="['/reservations']" style="margin: 0 .75rem;">Reservations page</button>
-            <button [routerLink]="['/deliveries']" style="margin: 0 .75rem;">Deliveries page</button>
-            <button [routerLink]="['/employees']" style="margin: 0 .75rem;">Employees page</button>
-            <button [routerLink]="['/reviews']" style="margin: 0 .75rem;">Reviews page</button>
-            <button [routerLink]="['/profit']" style="margin: 0 .75rem;">profit page</button>
-            <button [routerLink]="['/dish']" style="margin: 0 .75rem;">dish page</button>
-        </div>
-
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">
+                <img src="../assets/images/logo-1.png" alt="Logo" style="width:50px;">
+            </a>
+            <div class="collapse navbar-collapse justify-content-center">
+              <ul class="navbar-nav mx-auto order-0">
+                <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/orders']">Orders<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link"[routerLink]="['/reservations']">Reservations<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/deliveries']">Deliveries<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/employees']">Employees<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/reviews']">Reviews<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/profit']">profit<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link"  [routerLink]="['/dish']">dishs<span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link-logout" [routerLink]="['/login']">Logout <span class="sr-only">(current)</span></a>
+                  </li>
+            </ul>
+            </div>
+          </nav>
+          <div class="centered">Welcome To Mom's Spaghetti Restaurant</div>
     </div>
 </div>
