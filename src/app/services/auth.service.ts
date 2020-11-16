@@ -23,6 +23,8 @@ export class AuthService {
     loginSubject    = new Subject<any>();
     logoutSubject   = new Subject<any>();
 
+    registerSubject = new Subject<any>();
+
 
     login(email: string, password: string) {
         this.http.post(environment.key + 'session', {
@@ -42,7 +44,24 @@ export class AuthService {
     }
 
     refresh() {
-        
+
+    }
+
+    register(email: string, password: string, name: string, surname: string, address: string, phone: string, gender: string, dateOfBirth: string, allergens: string) {
+        this.http.post(environment.key+'customers', {
+            email: email,
+            password: password,
+            name: name,
+            surname: surname,
+            address: address,
+            phoneNumber: phone,
+            gender: gender,
+            dateOfBirth: dateOfBirth,
+            allergens: allergens 
+        }).subscribe({
+            next: (res) => { this.registerSubject.next(res); },
+            error:  (e) => { this.registerSubject.next(e); }
+        });
     }
 
 }
