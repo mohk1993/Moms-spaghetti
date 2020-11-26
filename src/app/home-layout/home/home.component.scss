@@ -6,14 +6,14 @@
     background-position-x: center;
     background-position-y: center;
 
-     //vh = window height, use with caution, makes shit break on tablets
-     //vw = window width, can be used to specify content size based on the device screen size
-     height: 100vh;
-     width: 100vw;
-     //center content horizontal and vertical center
-     display: flex;
-     justify-content: center;
-     align-items: center;
+    //vh = window height, use with caution, makes shit break on tablets
+    //vw = window width, can be used to specify content size based on the device screen size
+    height: 100vh;
+    width: 100vw;
+    //center content horizontal and vertical center
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .centered{
         color: white;
