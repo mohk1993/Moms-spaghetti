@@ -2,3 +2,30 @@
 
 // @import "./assets/scss-library/components.scss";
 @import "./assets/scss-library/base.scss";
+@import "./assets/scss-library/colours.scss";
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+//scrollbar
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+    // background-color: #dddddd;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background-color: $dark;
+}
+::-webkit-scrollbar-track {
+    // background-color: #dddddd;
+    background-color: transparent;
+    border-radius: 25px;
+}

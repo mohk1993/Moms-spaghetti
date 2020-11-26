@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
     
         <div class="col-12 d-flex justify-content-center">
@@ -22,7 +22,57 @@
         </div>
 
     </div>
+</div> -->
+
+
+<div class="container-fluid">
+    <div class="row row-body d-flex justify-content-center">
+        
+        <!-- header -->
+        <div class="col-8">
+            <div class="row">
+
+                <div class="col-1"></div>
+                <div class="col-3">
+                    Order number
+                </div>
+                <div class="col-2">
+                    Estimate
+                </div>
+                <div class="col-3">
+                    Start
+                </div>
+                <div class="col-3">
+                    Finish
+                </div>
+
+            </div>
+        </div>
+
+        <!-- body -->
+        <div class="col-8 table-item shadow cursor-pointer">
+            <div class="row">
+                <div class="col-1 status-colour">
+
+                </div>
+                <div class="col-3">
+                    Order
+                </div>
+                <div class="col-2">
+                    15:00
+                </div>
+                <div class="col-3">
+                    2020/11/26 15:48
+                </div>
+                <div class="col-3">
+                    -
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
 
 <div class="custom-dialog" *ngIf="cancellation_dialog">
     <app-cancellation-dialog (close)="closeCancellation($event)"></app-cancellation-dialog>

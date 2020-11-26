@@ -24,6 +24,7 @@ export class AuthService {
     logoutSubject   = new Subject<any>();
 
     registerSubject = new Subject<any>();
+    registerEmployeeSubject = new Subject<any>();
 
 
     login(email: string, password: string) {
@@ -61,6 +62,24 @@ export class AuthService {
         }).subscribe({
             next: (res) => { this.registerSubject.next(res); },
             error:  (e) => { this.registerSubject.next(e); }
+        });
+    }
+
+    register_employee(email: string, password: string, name: string, surname: string, address: string, phone: string, dateOfBirth: string, salary: number, workload: number, bankAccount: string) {
+        this.http.post(environment.key+'employees', {
+            email: email,
+            password: password,
+            name: name,
+            surname: surname,
+            address: address,
+            phoneNumber: phone,
+            dateOfBirth: dateOfBirth,
+            salary: salary,
+            workload: workload,
+            bankAccount: bankAccount,
+        }).subscribe({
+            next: (res) => { this.registerEmployeeSubject.next(res); },
+            error:  (e) => { this.registerEmployeeSubject.next(e);   }
         });
     }
 
