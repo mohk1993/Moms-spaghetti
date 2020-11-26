@@ -38,9 +38,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.authService.refresh_token  = res.tokens.refresh_token;
 
           //dependent on which kind of user it is, set the appropriate variable: admin, employee, customer
-          if(!res.admin)    this.authService.admin    = <Admin>res.admin;
-          if(!res.employee) this.authService.employee = <Employee>res.employee;
-          if(!res.customer) this.authService.customer = <Customer>res.customer;
+          if(res.admin)    this.authService.admin    = <Admin>res.admin;
+          if(res.employee) this.authService.employee = <Employee>res.employee;
+          if(res.customer) this.authService.customer = <Customer>res.customer;
 
           this.router.navigate(['/']);
 

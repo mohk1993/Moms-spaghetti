@@ -7,7 +7,7 @@ import { HomeLayoutComponent } from './home-layout.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'prefix',
+    component: HomeLayoutComponent,
     children: [
       {
         path: '',

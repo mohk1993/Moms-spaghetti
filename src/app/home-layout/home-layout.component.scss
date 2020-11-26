@@ -1,0 +1,28 @@
+.navbar-nav > li{
+    padding-left:15px;
+    padding-right:15px;
+}
+.navbar-nav, .nav-item.active {
+    color: white;
+    a {
+        color: #fff;
+        &:hover {
+            color: #aaa;
+        }
+        &:active {
+            color: black;
+        }
+    }
+}
+.navbar-nav, .nav-item.active {
+    color: white;
+    .nav-link-logout {
+        color: #fff;
+        &:hover {
+            color: red;
+        }
+        &:active {
+            color: black;
+        }
+    }
+}

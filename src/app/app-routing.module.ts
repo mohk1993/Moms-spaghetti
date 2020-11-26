@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
+        pathMatch: 'prefix',
         loadChildren: () => import('./home-layout/home-layout.module').then(m => m.HomeLayoutModule)
       },
       {
