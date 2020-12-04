@@ -46,6 +46,14 @@ const routes: Routes = [
         path: 'dish',
         loadChildren: () => import('./dish/dish.module').then(m => m.DishModule)
       },
+      {
+        path: 'add-dish',
+        loadChildren: () => import('./dish/add-dish/add-dish.module').then(m => m.AddDishModule)
+      },
+      {
+        path: 'edit-dish',
+        loadChildren: () => import('./dish/edit-dish/edit-dish.module').then(m => m.EditDishModule)
+      },
     ]
   },
   

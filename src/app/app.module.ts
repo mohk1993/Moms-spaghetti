@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StandardInterceptor } from './interceptor';
+import { dishServices } from './services/dish.service';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { StandardInterceptor } from './interceptor';
       multi: true
     },
     AuthService,
-    
+    dishServices
 
   ],
   bootstrap: [AppComponent]

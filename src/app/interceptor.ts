@@ -29,7 +29,8 @@ export class StandardInterceptor implements HttpInterceptor {
                 setHeaders: {
                     // 'Content-Type': 'application/json; charset=utf-8',
                     ContentType: 'application/json; charset=utf-8',
-                    "authorization": this.auth.token,
+                    "authorization": 'Bearer '+ this.auth.token,
+
                 },
             });
         

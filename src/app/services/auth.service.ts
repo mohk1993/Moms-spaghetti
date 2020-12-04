@@ -1,3 +1,4 @@
+
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
@@ -13,8 +14,11 @@ export class AuthService {
 
     constructor(private http: HttpClient) {}
 
+
     token: string;
     refresh_token: string;
+
+    refreshSessionSubject = new Subject<any>();
 
     admin: Admin;
     employee: Employee;
@@ -81,6 +85,22 @@ export class AuthService {
             next: (res) => { this.registerEmployeeSubject.next(res); },
             error:  (e) => { this.registerEmployeeSubject.next(e);   }
         });
+    }
+
+
+    refreshSession(token: string) {
+
+        this.http.post(environment.key + "session/refresh", {
+
+            refresh_token: token
+
+        }).subscribe( {
+
+            next: (res) => { this.refreshSessionSubject.next(res)},
+            error:  (e) => { this.refreshSessionSubject.next(e); }
+
+        });
+
     }
 
 }

@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row no-gutters d-flex justify-content-center">
+
+      <div class="col-4 form-input shadow">
+
+          <!-- dish information -->
+          <div class="section-label">
+              Dish Information
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Dish Name"  [(ngModel)]="dish.name">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="D-description" [(ngModel)]="dish.description">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nutritional Information" [(ngModel)]="dish.nutritionalInformation">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Allergen Information" [(ngModel)]="dish.allergenInformation">
+          </div>
+
+          <div class="separator">
+             <hr> 
+          </div>
+
+          <div class="form-group">
+              <input type="number" class="form-control" placeholder="D-price" [(ngModel)]="dish.price">
+          </div>
+          <div class="form-group">
+              <input type="number" class="form-control" placeholder="Quantity" [(ngModel)]="dish.quantity">
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" placeholder="ProfitMargin" [(ngModel)]="dish.profitMargin">
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" placeholder="AlcoholContent" [(ngModel)]="dish.alcoholContent">
+          </div>
+        
+          <div class="separator">
+              <hr> 
+          </div>
+          <div class="section-label">
+            Select all that apply
+          </div>
+
+          <div class="form-check ">
+            <input type="checkbox" class="form-check-input" id="Keto" [(ngModel)]="dish.keto">
+            <label class="form-check-label" for="Keto">Keto</label>
+          </div>
+          <div class="form-check ">
+            <input type="checkbox" class="form-check-input" id="Vegan" [(ngModel)]="dish.vegan">
+            <label class="form-check-label" for="Vegan">Vegan</label>
+          </div>
+          <div class="form-check ">
+            <input type="checkbox" class="form-check-input" id="Vegetarian" [(ngModel)]="dish.vegetarian">
+            <label class="form-check-label" for="Vegetarian">Vegetarian</label>
+          </div>
+          
+
+          <div class="separator">
+              <hr> 
+          </div>
+
+          <div class="form-group d-flex justify-content-center">
+              <div class="col-xs-8 col-xs-offset-4">
+                <button class="btn cancel" [routerLink]="['/dish']" >Cancel</button>
+                <button class="btn" (click)="updateDish()">Update</button>
+              </div>  
+          </div>		
+          
+      </div>
+
+
+
+  </div>
+</div>
