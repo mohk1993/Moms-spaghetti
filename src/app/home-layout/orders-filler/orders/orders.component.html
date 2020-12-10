@@ -37,35 +37,41 @@
                     Order number
                 </div>
                 <div class="col-2">
-                    Estimate
+                    <!-- Estimate -->
                 </div>
                 <div class="col-3">
-                    Start
+                    <!-- Start -->
                 </div>
                 <div class="col-3">
-                    Finish
+                    <!-- Finish -->
                 </div>
 
             </div>
         </div>
 
         <!-- body -->
-        <div class="col-8 table-item shadow cursor-pointer">
-            <div class="row">
-                <div class="col-1 status-colour">
+        <div class="col-8 table-item shadow cursor-pointer" *ngFor="let ord of orders; let i = index" (click)="goToOrder(i)">
+            <div class="row no-gutters">
+                <div class="col-1 status-colour" 
+                [ngClass]="{
+                    'status-waiting': ord.status == 'waiting', 
+                    'status-preparing': ord.status == 'preparing', 
+                    'status-completed': ord.status == 'completed', 
+                    'status-cancelled': ord.status == 'cancelled' 
+                }">
 
                 </div>
-                <div class="col-3">
-                    Order
+                <div class="col-3" style="padding-left: .75rem;">
+                    {{ ord.orderNumber }}
                 </div>
                 <div class="col-2">
-                    15:00
+                    <!-- 15:00 -->
                 </div>
                 <div class="col-3">
-                    2020/11/26 15:48
+                    <!-- 2020/11/26 15:48 -->
                 </div>
                 <div class="col-3">
-                    -
+                    <!-- - -->
                 </div>
             </div>
         </div>

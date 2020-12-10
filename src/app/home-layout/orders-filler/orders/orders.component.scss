@@ -11,15 +11,20 @@
 }
 .table-item {
 
-    margin: 1.25rem 0;
+    margin: .75rem 0;
     padding: 0.75rem 0;
     
     border: 2px solid $dark;
     border-radius: 4px;
 
     .status-colour {
+        overflow: hidden;
         margin: -.75rem 0;
         border-right: 1px solid $dark;
     }
     
 }
+.status-waiting   { background-color: $hold; }
+.status-preparing { background-color: $preparing; }
+.status-completed { background-color: $green_good; }
+.status-cancelled { background-color: $error; }
