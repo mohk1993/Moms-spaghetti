@@ -1,0 +1,97 @@
+@import '../../../../assets/scss-library/colours.scss';
+
+.add-comment-text {
+    color: $lighter_black;
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    margin-bottom: .75rem .25rem;
+}
+.add-comment {
+
+    width: 40vw;
+    height: 8rem;
+
+    resize: none;
+    outline: none;
+
+    border: 2px solid $inactive;
+    border-radius: 4px;
+
+    padding: .75rem .5rem;
+
+    &:hover {
+        border-color: $dark;
+    }
+    &:active {
+        border-color: $lightest_inactive;
+    }
+    &:focus {
+        border-color: $lightest_inactive;
+    }
+}
+.dish-item {
+    border: 2px solid $inactive;
+    border-radius: 8px;
+    margin: .75rem 0;
+
+    .image {
+        width: 4rem;
+        height: 4rem;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        border: 2px solid black;
+        border-radius: 8px;
+    }
+    .content {
+        width: 25%;
+        margin-left: .5rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .content-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: $lighter_black;
+        }
+        .content-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: $lighter_black
+        }
+    }
+    .content-description {
+        width: 30%;
+        color: $lighter_inactive;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .add-to-order {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        input {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            outline: none;
+            border: 2px solid $inactive;
+            border-radius: 8px;
+            text-align: center;
+
+            &:hover { border-color: $dark; }
+            &:focus { border-color: $lightest_inactive; }
+            &:active { border-color: $lightest_inactive; }
+        }
+        button {
+            margin: 0 .5rem;
+        }
+    }
+}

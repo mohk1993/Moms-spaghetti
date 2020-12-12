@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Order } from 'src/app/interfaces/order.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -15,53 +16,14 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
 
   getOrdersSubscription: Subscription;
+  postOrdersSubscription: Subscription;
 
   constructor(private router: Router,
+    public auth: AuthService,
     private orderService: OrderService) {
 
-    this.orders = new Array<Order>(
-      {
-        id: 1,
-        orderNumber: 'No 1',
-        status: 'waiting',
-        total: 100,
-
-        dishes: null,
-        
-        comment: null,
-      },
-      {
-        id: 2,
-        orderNumber: 'No 2',
-        status: 'preparing',
-        total: 100,
-
-        dishes: null,
-        
-        comment: null,
-      },
-      {
-        id: 3,
-        orderNumber: 'No 3',
-        status: 'completed',
-        total: 100,
-
-        dishes: null,
-        
-        comment: null,
-      },
-      {
-        id: 4,
-        orderNumber: 'No 4',
-        status: 'cancelled',
-        total: 100,
-
-        dishes: null,
-        
-        comment: null,
-      }
-    );
-    // this.orderService.getOrders();
+    this.orders = new Array<Order>();
+    this.orderService.getOrders();
 
   }
 
@@ -76,6 +38,14 @@ export class OrdersComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.postOrdersSubscription = this.orderService.postOrderSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+          console.log(res);
+          this.router.navigate(['orders/single'], { queryParams: { order_id: res.id.toString() }});
+        } else console.log(res);
+      }
+    })
   }
   ngOnDestroy() {
     if(this.getOrdersSubscription) this.getOrdersSubscription.unsubscribe();
@@ -83,6 +53,18 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   goToOrder(i: number) {
     this.router.navigate(['orders/single'], { queryParams: { order_id: this.orders[i].id.toString() }});
+  }
+  createOrder() {
+    this.orderService.postOrder(<Order>{
+      id: null,
+      orderNumber: null,
+      status: null,
+      total: 0,
+
+      dishes: [],
+      
+      comment: null,
+    });
   }
 
   cancellation_dialog: boolean = false;
