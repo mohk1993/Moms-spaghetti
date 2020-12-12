@@ -1,0 +1,29 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <h1>Welcome to</h1>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <h4>Delivery Employee page</h4>
+        </div>
+
+        <div style="padding: 3rem 0;"></div>
+
+        <div class="col-12 d-flex justify-content-center">
+            <h2>Navigate to</h2>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button [routerLink]="['/deliveries']" style="margin: 0 .75rem;">Deliveries page</button>
+            <button [routerLink]="['/orders/single']" style="margin: 0 .75rem;">Order page</button>
+            <button [routerLink]="['/deliveries/progress']" style="margin: 0 .75rem;">Delivery progress page</button>
+            <button [routerLink]="['/deliveries/status']" style="margin: 0 .75rem;">Change delivery status page</button>
+            <button (click)="openCancellation()" style="margin: 0 .75rem;">Cancellation dialog</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="custom-dialog" *ngIf="cancellation_dialog">
+    <app-cancellation-dialog (close)="closeCancellation($event)"></app-cancellation-dialog>
+</div>

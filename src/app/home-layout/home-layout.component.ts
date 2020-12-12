@@ -61,19 +61,16 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
 
     this.logoutSubscription = this.authService.logoutSubject.subscribe({
       next: (res) => {
-        if(!res.error) {
+        
+        this.authService.token          = null;
+        this.authService.refresh_token  = null;
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        this.authService.admin          = null;
+        this.authService.employee       = null;
+        this.authService.customer       = null;
 
-          this.authService.token          = null;
-          this.authService.refresh_token  = null;
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          this.authService.admin          = null;
-          this.authService.employee       = null;
-          this.authService.customer       = null;
-
-          this.router.navigate(['/login']);
-
-        } else console.log('error while logout!');
+        this.router.navigate(['/login']);
       }
     });
   }

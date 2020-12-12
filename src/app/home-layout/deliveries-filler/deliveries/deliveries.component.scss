@@ -1,0 +1,29 @@
+@import '../../../../assets/scss-library/colours.scss';
+
+.container-fluid {
+    height: 100%;
+    background-color: $darker_white;
+
+    .row-body {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+.table-item {
+
+    margin: .75rem 0;
+    padding: 0.75rem 0;
+    
+    border: 2px solid $dark;
+    border-radius: 4px;
+
+    .status-colour {
+        overflow: hidden;
+        margin: -.75rem 0;
+        border-right: 1px solid $dark;
+    }
+    
+}
+.status-waiting   { background-color: $hold; }
+.status-delivering { background-color: $preparing; }
+.status-delivered { background-color: $green_good; }

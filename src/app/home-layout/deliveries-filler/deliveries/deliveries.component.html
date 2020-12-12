@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row">
     
         <div class="col-12 d-flex justify-content-center">
@@ -16,6 +16,62 @@
         <div class="col-12 d-flex justify-content-center">
             <button [routerLink]="['/']" style="margin: 0 .75rem;">Main page/Home</button>
             <button [routerLink]="['/deliveries/single']" style="margin: 0 .75rem;">Delivery page</button>
+        </div>
+
+    </div>
+</div>-->
+
+
+<div class="container-fluid" >
+    <div class="row row-body d-flex justify-content-center">
+        
+        <!-- header -->
+        <div class="col-8">
+            <div class="row">
+
+                <div class="col-1">
+
+                </div>
+                <div class="col-3">
+                    Deliveries
+                </div>
+                <div class="col-2">
+                    <!-- Estimate -->
+                </div>
+                <div class="col-3">
+                    <!-- Start -->
+                </div>
+                <div class="col-3">
+                    <!-- Finish -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- body -->
+        <div class="col-8 table-item shadow cursor-pointer" *ngFor="let delv of deliveries; let i=index;">
+            <div class="row no-gutters">
+                <div class="col-1 status-colour"
+                [ngClass]="{
+                    'status-waiting': delv.deliveryStatus == 'waiting', 
+                    'status-delivering': delv.deliveryStatus == 'delivering', 
+                    'status-delivered': delv.deliveryStatus == 'delivered' 
+                }">
+
+                </div>
+                <div class="col-3" style="padding-left: .75rem;">
+              
+                </div>
+                <div class="col-2">
+                    <!-- 15:00 -->{{delv.createdAt | date: 'short'}}
+                </div>
+                <div class="col-3">
+                    <!-- 2020/11/26 15:48 -->{{delv.requestedDeliveryTime}}
+                </div>
+                <div class="col-3">
+                    <!-- - -->
+                </div>
+            </div>
         </div>
 
     </div>

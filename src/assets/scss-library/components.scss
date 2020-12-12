@@ -1,1 +1,8 @@
 @import "./colours.scss";
+.text-overflowed-ellipsis {
+    display: inline-block;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

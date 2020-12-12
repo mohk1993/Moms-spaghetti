@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { DeliveriesRoutingModule } from './deliveries-routing.module';
 import { DeliveriesComponent } from './deliveries.component';
 
@@ -9,7 +9,7 @@ import { DeliveriesComponent } from './deliveries.component';
   ],
   imports: [
     DeliveriesRoutingModule,
-    
+    CommonModule,
   ]
 })
 export class DeliveriesModule { }

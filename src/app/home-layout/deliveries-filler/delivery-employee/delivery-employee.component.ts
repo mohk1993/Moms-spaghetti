@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-delivery',
-  templateUrl: './delivery.component.html',
-  styleUrls: ['./delivery.component.scss']
+  selector: 'app-delivery-employee',
+  templateUrl: './delivery-employee.component.html',
+  styleUrls: ['./delivery-employee.component.scss']
 })
-export class DeliveryComponent {
-  orderId:string;
+export class DeliveryEmployeeComponent {
+  deliveryId:string;
   constructor(private readonly route:ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(param=>{
-      this.orderId=param["order_id"];
-      if(this.orderId==null){
-        this.router.navigate(["/"]);
-      }
+      this.deliveryId=param["deliveryId"];
+      // if(this.deliveryId==null){
+      //   this.router.navigate(["/"]);
+      // }
     })
-
+    console.log(new Date().toISOString())
   }
 
   cancellation_dialog: boolean = false;

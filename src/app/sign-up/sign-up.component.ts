@@ -83,7 +83,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   register() {
     try {
       var dateOfBirth = 
-      (this.year_selected+1918).toString() 
+      ((this.year_selected+1918)).toString() 
       + '-' +
       (this.month_selected+1 > 10 ? this.month_selected+1 : '0'+(this.month_selected+1)).toString()
       + '-' +

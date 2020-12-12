@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StandardInterceptor } from './interceptor';
 import { dishServices } from './services/dish.service';
 import { OrderService } from './services/order.service';
+import { DeliveryService } from './services/delivery.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { OrderService } from './services/order.service';
     AuthService,
     dishServices,
     OrderService,
-
+    DeliveryService
   ],
   bootstrap: [AppComponent]
 })
