@@ -18,7 +18,11 @@ const routes: Routes = [
       {
         path: 'single',
         loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
-      }
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('./create-order/create-order.module').then(m => m.CreateOrderModule)
+      },
     ]
   }
 ];

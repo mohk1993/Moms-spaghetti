@@ -1,0 +1,160 @@
+@import '../../../../assets/scss-library/colours.scss';
+
+.add-comment-text {
+    color: $lighter_black;
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    margin-bottom: .75rem .25rem;
+}
+.add-comment {
+
+    width: 40vw;
+    height: 8rem;
+
+    resize: none;
+    outline: none;
+
+    border: 2px solid $inactive;
+    border-radius: 4px;
+
+    padding: .75rem .5rem;
+
+    &:hover {
+        border-color: $dark;
+    }
+    &:active {
+        border-color: $lightest_inactive;
+    }
+    &:focus {
+        border-color: $lightest_inactive;
+    }
+}
+.date-separator {
+    font-size: 2rem;
+    margin: 0 1rem 0 1rem;
+}
+.reservation-dates {
+
+    .date-text {
+        text-align: center;
+        margin-top: .75rem;
+        margin-bottom: .25rem;
+        color: $lighter_black;
+        font-weight: 600;
+        font-size: 1.05rem;
+    }
+
+    input {
+        border: 2px solid $inactive;
+        border-radius: 4px;
+        background-color: white;
+
+        &:hover {
+            border-color: $dark;
+        }
+        &:active {
+            border-color: $lightest_inactive;
+        }
+        &:focus {
+            border-color: $lightest_inactive;
+        }
+    }
+    .date-display {
+        width: 6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-left: .25rem;
+
+        border: 2px solid $inactive;
+        border-radius: 4px;
+        color: $lighter_black;
+        font-weight: 600;
+        font-size: .9rem;
+    }
+    input[type="date"] {
+        margin-right: .5rem;
+        width: 2rem;
+        overflow: hidden;
+        color: transparent;
+        stroke-opacity: 0;
+
+        outline: none;
+        &::-webkit-calendar-picker-indicator {
+            width: 1.3rem;
+            text-align: center;
+            margin-left: -1.5rem;
+        }
+    }
+    input[type="time"] {
+        margin-right: .5rem;
+        width: 2rem;
+        overflow: hidden;
+        color: transparent;
+
+        outline: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        &::-webkit-calendar-picker-indicator {
+            width: 1.2rem;
+            text-align: center;
+            margin-left: -1.5rem;
+        }
+    }
+
+}
+.other-details {
+    margin-top: 2rem;
+    .other-header {
+        color: $lighter_black;
+        font-size: .8rem;
+        font-weight: 500;
+    }
+    .number-o-people {
+        display: flex;
+        flex-direction: row;
+
+        input {
+            width: 4rem;
+            border: 2px solid $inactive;
+            border-radius: 4px;
+
+    
+            &:hover {
+                border-color: $dark;
+            }
+            &:active {
+                border-color: $lightest_inactive;
+            }
+            &:focus {
+                border-color: $lightest_inactive;
+            }
+        }
+    }
+    .special-occasion {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid $lighter_black;
+        border-radius: 4px;
+
+        margin-left: 3.8rem;
+
+
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
+    }
+    .occasion-active {
+        background-color: $dark;
+        color: $green_good;
+    }
+}

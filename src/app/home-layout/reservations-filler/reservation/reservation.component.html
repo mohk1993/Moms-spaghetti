@@ -17,16 +17,9 @@
             <button [routerLink]="['/reservations']" style="margin: 0 .75rem;">Reservations page</button>
             <button [routerLink]="['/reservations/form']" style="margin: 0 .75rem;">Edit reservation</button>
             <button [routerLink]="['/menu']" style="margin: 0 .75rem;">Menu page</button>
-            <button (click)="openCancellation()" style="margin: 0 .75rem;">Cancellation dialog</button>
-            <button (click)="openExperience()" style="margin: 0 .75rem;">Rate experience</button>
+            <!-- <button (click)="openCancellation()" style="margin: 0 .75rem;">Cancellation dialog</button>
+            <button (click)="openExperience()" style="margin: 0 .75rem;">Rate experience</button> -->
         </div>
 
     </div>
-</div>
-
-<div class="custom-dialog" *ngIf="cancellation_dialog">
-    <app-cancellation-dialog (close)="closeCancellation($event)"></app-cancellation-dialog>
-</div>
-<div class="custom-dialog" *ngIf="experience_dialog">
-    <app-cancellation-dialog (close)="closeExperience($event)"></app-cancellation-dialog>
 </div>

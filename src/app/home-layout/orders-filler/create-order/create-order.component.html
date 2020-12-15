@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row">    
+        <div class="col-12">
+            <div class="row d-flex justify-content-center">
+                <div class="col-8 d-flex flex-column align-items-center">
+
+                    <div class="add-comment-text" style="margin-top: 3.5rem">Add a comment</div>
+                    <textarea name="" id="" class="add-comment shadow" [(ngModel)]="order.comment"></textarea>
+
+                    <!-- overview -->
+                    <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;">
+                        <div class="col-12 text-center dish-header">
+                            Current dishes selected(${{ getTotal() | number: '0.2-2' }})
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters" style="width: 100%;">
+                        <div class="col-12 dish-item d-flex flex-row" *ngFor="let dish of order.dishes; let i = index">
+
+                            <div class="image">
+                                image
+                            </div>
+                            <div class="content">
+                                <div class="content-name">{{ dish.name }}</div>
+                                <div class="content-price">${{ dish.price }}</div>
+                            </div>
+                            <div class="flex-grow-1"></div>
+                            <div class="content-description">{{ dish.description }}</div>
+                            <div class="flex-grow-1"></div>
+                            <div class="add-to-order">
+                                <div><b>QTY:</b> {{ order_dishes[i].quantity }}</div>
+                                <button class="btn btn-danger d-flex justify-content-center align-items-center" style="font-size: 1.25rem; font-weight: 700;" (click)="removeDish(i)">-</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;" *ngIf="order_dishes && order_dishes.length > 0">
+                        <div class="col-12 d-flex justify-content-center">
+                            <button class="btn btn-primary" style="margin-right: .75rem;" (click)="orderCreate('delivery')">Delivery</button>
+                            <button class="btn btn-success" style="margin-right: .75rem;" (click)="orderCreate('pick-up')">Pick up</button>
+                            <button class="btn btn-dark" (click)="orderCreate('reservation')">Reservation</button>
+                        </div>
+                    </div>
+
+                    <!-- select -->
+                    <div class="row no-gutters" style="width: 100%; margin-top: 2.5rem;">
+                        <div class="col-12 text-center dish-header">
+                            Add orders to dish
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters" style="width: 100%;">
+                        <div class="col-12 dish-item d-flex flex-row" *ngFor="let dish of dishes; let i = index">
+
+                            <div class="image">
+                                image
+                            </div>
+                            <div class="content">
+                                <div class="content-name">{{ dish.name }}</div>
+                                <div class="content-price">${{ dish.price }}</div>
+                            </div>
+                            <div class="flex-grow-1"></div>
+                            <div class="content-description">{{ dish.description }}</div>
+                            <div class="flex-grow-1"></div>
+                            <div class="add-to-order">
+                                <input type="number" placeholder="QTY" #quantity value="1" min="1" max="99" (input)="noLower($event)"><button class="btn btn-success" (click)="addDish(i, quantity.value); quantity.value = 1">Add</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

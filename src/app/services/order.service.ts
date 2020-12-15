@@ -44,8 +44,11 @@ export class OrderService {
         });
     }
 
-    postOrder(order: Order) {
-        this.http.post(environment.key + 'orders', order).subscribe({
+    postOrder(order: Order, order_dishes: Array<Order_dish>) {
+        this.http.post(environment.key + 'orders', {
+            order: order,
+            orderDishes: order_dishes
+        }).subscribe({
             next: (res) => { this.postOrderSubject.next(res);   },
             error:  (e) => { this.postOrderSubject.next(e);     }
         });
@@ -64,7 +67,7 @@ export class OrderService {
         });
     }
     putOrderStatus(id: string, status: string) {
-        this.http.post(environment.key + 'orders/' + id + '/status', status).subscribe({
+        this.http.put(environment.key + 'orders/' + id + '/status', { status: status }).subscribe({
             next: (res) => { this.putOrderStatusSubject.next(res);   },
             error:  (e) => { this.putOrderStatusSubject.next(e);     }
         });

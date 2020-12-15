@@ -1,12 +1,148 @@
-import { Component } from '@angular/core';
+import { TypeScriptEmitter } from '@angular/compiler';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Reservation } from 'src/app/interfaces/reservation.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-reservation-form',
   templateUrl: './reservation-form.component.html',
   styleUrls: ['./reservation-form.component.scss']
 })
-export class ReservationFormComponent {
+export class ReservationFormComponent implements OnInit, OnDestroy {
 
-  constructor() {}
+  reservationID: string;
+  reservation: Reservation = {
+    "id": null,
+    "orderId": null,
+    "reviewId": null,
+    "calendarUuid": null,
+    "customerId": this.auth.customer ? this.auth.customer.id : null, //this.router.navigate(['/']) as undefined, 
+
+    "comment": null,
+    "numberOfPeople": 1,
+    "specialOccasion": false,
+
+    "startTime": new Date(),
+    "endTime": new Date(),
+
+    "createdAt": null
+  };
+
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+
+  getReservationSubscription: Subscription;
+  postReservationSubscription: Subscription;
+  putReservationSubscription: Subscription;
+
+  constructor(private readonly route:ActivatedRoute, private router: Router,
+    private readonly auth: AuthService,
+    private reservationService: ReservationService) {
+      
+      let year = new Date().getFullYear().toString();
+      year += '-';
+      year += (new Date().getMonth() + 1) > 10 ? (new Date().getMonth() + 1).toString() : '0'+(new Date().getMonth() + 1).toString(); 
+      year += '-';
+      year += new Date().getDate() > 10 ? new Date().getDate().toString() : "0"+new Date().getDate().toString();
+
+      let time = new Date().getHours() > 10 ? new Date().getHours().toString() : "0"+new Date().getHours().toString();
+      time += ":"
+      time+= new Date().getMinutes() > 10 ? new Date().getMinutes().toString() : '0'+new Date().getMinutes().toString();
+
+      this.startDate = year.toString();
+      this.startTime = time.toString();
+      this.endDate = year.toString();
+      this.endTime = time.toString();
+
+    this.route.queryParams.subscribe(params => {
+      this.reservationID = params['reservation_id'];
+      if(this.reservationID == null) this.create = true;
+      else {
+        this.create = false;
+        this.reservationService.getReservation(this.reservationID);
+      }
+    });
+  }
+  create: boolean = true;
+  ngOnInit() {
+    console.log('oninit')
+    this.postReservationSubscription = this.reservationService.postReservationSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+
+          console.log(res);
+          this.router.navigate(['/reservations']);
+
+        } else console.log(res);
+      }
+    });
+    this.getReservationSubscription = this.reservationService.getReservationSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+
+          console.log(res);
+          this.reservation = <Reservation>res;
+          this.startDate = this.reservation.startTime.toString().split('T')[0];
+          this.startTime = this.reservation.startTime.toString().split('T')[1].split('Z')[0].substring(0, 5);
+          this.endDate = this.reservation.endTime.toString().split('T')[0];
+          this.endTime = this.reservation.endTime.toString().split('T')[1].split('Z')[0].substring(0, 5);
+
+        } else console.log(res);
+      }
+    });
+    this.putReservationSubscription = this.reservationService.putReservationSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+            
+          console.log(res);
+          this.reservationService.getReservation(this.reservationID);
+
+        } else console.log(res);
+      }
+    });
+  }
+  ngOnDestroy() {
+    if(this.getReservationSubscription) this.getReservationSubscription.unsubscribe();
+    if(this.postReservationSubscription) this.postReservationSubscription.unsubscribe();
+    if(this.putReservationSubscription) this.putReservationSubscription.unsubscribe();
+  }
+  state: string;
+  createReservation(state: string) {
+
+    this.reservation.startTime = new Date(this.startDate+"T"+this.startTime+":00");
+    this.reservation.endTime = new Date(this.endDate+"T"+this.endTime+":00");
+    if(this.create) {
+
+      console.log(this.reservation);
+
+      this.state = state;
+      console.log(state);
+      this.reservationService.postReservation(this.reservation);
+
+    } else {
+
+      console.log(this.reservation);
+
+      this.state = state;
+      console.log(state);
+      this.reservationService.putReservation(this.reservationID, this.reservation);
+
+    }
+
+  }
+
+
+  changeOccasion() {
+    this.reservation.specialOccasion = !this.reservation.specialOccasion;
+  }
+  noLower(e) { 
+    if(!e.srcElement.value) e.srcElement.value = 1; 
+    else if(e.srcElement.value as number >= 99) e.srcElement.value = 99; 
+  }
 
 }

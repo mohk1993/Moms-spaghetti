@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Dish } from 'src/app/interfaces/dish.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { Order_dish } from 'src/app/interfaces/order_dish.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { dishServices } from 'src/app/services/dish.service';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -17,8 +18,7 @@ export class OrderComponent implements OnInit, OnDestroy{
   orderId:string;
   
   getOrderSubscription: Subscription;
-  putOrderDishSubscription: Subscription;
-  getDishesSubscription: Subscription;
+  updateOrderStatusSubscription: Subscription;
 
   order: Order = {
     id: null,
@@ -31,18 +31,20 @@ export class OrderComponent implements OnInit, OnDestroy{
     comment: null,
   };
   dishes: Array<Dish>;
-  
+  options: Array<string> = new Array<string>('waiting', 'preparing', 'completed', 'cancelled');
+
   constructor(private readonly route:ActivatedRoute, private router: Router,
+    public readonly auth: AuthService,
     private orderService: OrderService, private dishService: dishServices) {
     
       this.route.queryParams.subscribe(param=>{
-      this.orderId=param["order_id"];
-      if(this.orderId==null){
-        this.router.navigate(["/"]);
-      } else this.orderService.getOrder(this.orderId);
-    });
-    this.dishes = new Array<Dish>();
-    this.dishService.getAllDishes();
+        this.orderId = param["order_id"];
+
+        if(this.orderId == null){
+          this.router.navigate(["/"]);
+        } else this.orderService.getOrder(this.orderId);
+      
+      });
   }
 
   ngOnInit() {
@@ -56,43 +58,27 @@ export class OrderComponent implements OnInit, OnDestroy{
         } else console.log(res);
       }
     });
-    this.putOrderDishSubscription = this.orderService.putOrderDishSubject.subscribe({
+    this.updateOrderStatusSubscription = this.orderService.putOrderStatusSubject.subscribe({
       next: (res) => {
         if(!res.error) {
 
           console.log(res);
+          this.orderService.getOrder(this.orderId);
 
         } else console.log(res);
       }
     });
-    this.getDishesSubscription = this.dishService.getAllDishesSubject.subscribe({
-      next: (res) => {
-        if(!res.error) {
-
-          console.log(res);
-          this.dishes = <Array<Dish>>res;
-
-        } else console.log(res);
-      }
-    });
-    
   }
   ngOnDestroy() {
-
+    if(this.getOrderSubscription) this.getOrderSubscription.unsubscribe();
+    if(this.updateOrderStatusSubscription) this.updateOrderStatusSubscription.unsubscribe();
   }
 
-  addDish(i: number, val: number) {
-    // console.log(i, val);
-    try {
-      let ord_id = parseInt(this.orderId);
-      this.orderService.putOrderDish(this.orderId, <Order_dish>{ 
-        dishId: this.dishes[i].id, 
-        orderId: ord_id,  
-        quantity: val as number,
-        total: this.dishes[i].price * val as number
-      });
-    } catch(e) { console.log('Error in order id parsing'); }
-    
+  statusChange(status: string) {
+    // console.log(status);
+    if(confirm('Do you wish to change this order status from ' + this.order.status + ' to ' + status + '?'))
+      this.orderService.putOrderStatus(this.orderId, status);
   }
+
 
 }
