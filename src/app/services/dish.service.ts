@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 
 // Interfaces
 import { Dish } from '../interfaces/dish.interface';
+import { PopularDish } from '../interfaces/popular-dish.interface';
 
 @Injectable()
 
@@ -16,12 +17,14 @@ export class dishServices {
 createDishSubject = new Subject<any>();
 
 getAllDishesSubject = new Subject<any>();
+getPopularDishesSubject = new Subject<any>();
 getDisheSubject = new Subject <any>();
 deleteDishesSubject = new Subject<any>();
 updateDishSubject = new Subject<any>();
 
 constructor(private readonly auth: AuthService,private http: HttpClient){}
 dishes: Dish;
+popularDishes: PopularDish;
 createDish(name: string, description: string, price: number, profitMargin: number, quantity: number, alcoholContent: number, nutritionalInformation: string, allergenInformation: string, vegan: boolean, vegetarian: boolean, keto: boolean) {
     this.http.post(environment.key+'dishes', {
         name: name,
@@ -45,6 +48,12 @@ getAllDishes(){
     this.http.get(environment.key+'dishes').subscribe({
         next: (res) => { this.getAllDishesSubject.next(<{}>res);},
         error: (e) => { this.getAllDishesSubject.next(e);}
+    });
+}
+getPopularDishes(){
+    this.http.get(environment.key+'dishes'+'/popular').subscribe({
+        next: (res) => { this.getPopularDishesSubject.next(<{}>res);},
+        error: (e) => { this.getPopularDishesSubject.next(e);}
     });
 }
 getDish(id:string){

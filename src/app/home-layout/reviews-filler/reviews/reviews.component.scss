@@ -1,0 +1,54 @@
+@import '../../../../assets/scss-library/colours.scss';
+
+.container-fluid {
+    height: 100%;
+    background-color: $darker_white;
+
+    .row {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+.review-section{
+    color: $lightest_gray;
+}
+.form-input {
+    background-color: $dark;
+
+    padding: 2.5rem 2rem;
+
+    border-radius: 4px;
+
+    .section-label {
+        color: $lightest_gray;
+        font-size: 1.25rem;
+        padding-bottom: .5rem;
+    }
+    .subsection-label {
+        color: $lightest_gray;
+        font-size: 1.1rem;
+        padding-bottom: .25rem;
+    }
+    .separator {
+        hr {
+            width: 40%;
+            background-color: $light_gray;
+        }
+    }
+    .btn {        
+        font-size: 16px;
+        font-weight: bold;
+        background: #5cd3b4;
+        border: none;
+        margin-top: 1.5rem;
+        margin-bottom: -1.25rem;
+        min-width: 140px;
+        &:hover, &:focus {
+            background: #41cba9;
+            outline: none !important;
+        }
+    }
+}
+
+
+

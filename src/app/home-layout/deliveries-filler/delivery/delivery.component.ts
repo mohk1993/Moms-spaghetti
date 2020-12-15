@@ -14,7 +14,7 @@ export class DeliveryComponent {
       if(this.orderId==null){
         this.router.navigate(["/"]);
       }
-    })
+    })  
 
   }
 

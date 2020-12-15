@@ -1,12 +1,51 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy,OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { isNullOrUndefined } from 'util';
+import { ActivatedRoute, Router } from '@angular/router';
+import { from } from 'rxjs';
+
+import { AuthService } from 'src/app/services/auth.service';
+import { Reviews } from 'src/app/interfaces/reviews.interfave';
+import { Review } from 'src/app/interfaces/review.interface';
+import { reviewService } from 'src/app/services/review.service';
+
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss']
 })
-export class ReviewsComponent {
+export class ReviewsComponent implements OnInit, OnDestroy{
 
-  constructor() {}
+  reviews: Array<Reviews>
+  getAllReviewsSubscription: Subscription;
+  getReviewSubscription: Subscription;
+
+  constructor(private auth:AuthService, private reviewService: reviewService, public router: Router,public route:ActivatedRoute) {
+
+    this.reviews = new Array<Reviews>();
+    this.reviewService.getAllReviews();
+  }
+
+  ngOnInit() {
+    this.getAllReviewsSubscription = this.reviewService.getAllReviewsSubject.subscribe({
+      next: (res) =>{
+        if(!(res.error)){
+          this.reviews =res;
+          // console.log(this.reviews)
+          // console.log(res);
+        }else {
+          console.log(res);
+        }
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if(this.getAllReviewsSubscription) this.getAllReviewsSubscription.unsubscribe();
+  }
+  editReview(id:number){
+    this.router.navigate(['/reviews/single'], { queryParams: { review_id: id } });
+  }
 
 }

@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { ReviewsRoutingModule } from './reviews-routing.module';
 import { ReviewsComponent } from './reviews.component';
@@ -9,6 +11,8 @@ import { ReviewsComponent } from './reviews.component';
   ],
   imports: [
     ReviewsRoutingModule,
+    FormsModule,
+    CommonModule
     
   ]
 })

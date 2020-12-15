@@ -13,6 +13,7 @@ import { dishServices } from './services/dish.service';
 import { OrderService } from './services/order.service';
 import { DeliveryService } from './services/delivery.service';
 import { ReservationService } from './services/reservation.service';
+import { reviewService } from './services/review.service';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ReservationService } from './services/reservation.service';
     dishServices,
     OrderService,
     DeliveryService,
-    ReservationService
+    ReservationService,
+    reviewService
   ],
   bootstrap: [AppComponent]
 })

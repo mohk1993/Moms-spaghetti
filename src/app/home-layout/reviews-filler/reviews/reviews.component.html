@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
     
         <div class="col-12 d-flex justify-content-center">
@@ -18,5 +18,32 @@
             <button [routerLink]="['/reviews/single']" style="margin: 0 .75rem;">Review page</button>
         </div>
 
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row no-gutters d-flex justify-content-center">
+        <div class="col-8 form-input shadow">
+            <div class="section-label mt-4">
+                Reviews Information
+            </div>
+            <div class="separator">
+                <hr> 
+            </div>
+            <div class="row review-section" *ngFor="let rev of reviews; let i=index;">
+                <div class="col">
+                  {{rev.comment}}
+                </div>
+                <div class="col-md-auto">
+                  {{rev.rating}}
+                </div>
+                <div class="col col-lg-2">
+                  Star
+                </div>
+                <div class="col col-lg-2">
+                    <a href="#" [routerLink]="['/reviews/single']" (click)="editReview(rev.id)">See more</a>
+                  </div>
+            </div>
+        </div>
     </div>
 </div>
