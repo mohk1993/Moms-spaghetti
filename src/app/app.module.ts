@@ -12,6 +12,7 @@ import { StandardInterceptor } from './interceptor';
 import { dishServices } from './services/dish.service';
 import { OrderService } from './services/order.service';
 import { DeliveryService } from './services/delivery.service';
+import { reviewService } from './services/review.service';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DeliveryService } from './services/delivery.service';
     AuthService,
     dishServices,
     OrderService,
-    DeliveryService
+    DeliveryService,
+    reviewService
   ],
   bootstrap: [AppComponent]
 })

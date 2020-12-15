@@ -49,8 +49,6 @@ export class DishComponent implements OnInit, OnDestroy{
       next: (res) =>{
         if(!(res.error)){
           this.dishes =res;
-          console.log(this.dishes)
-          console.log(res);
         }else {
           console.log(res);
         }

@@ -24,22 +24,17 @@
 
 <div class="container-flui">
   <div class="row justify-content-center" >
-    <div class="btn btn-success " [routerLink]="['/add-dish']">Add New Dish </div>
-    <div class="btn btn-success ml-4" [routerLink]="['/popular-dish']">Most Popular Dishes </div>
+    <div class="btn btn-success ml-4" [routerLink]="['/dish']">Go Back </div>
   </div>
-  <div class="row justify-content-center" *ngFor="let d of dishes; let i=index;">
+  <div class="row justify-content-center" *ngFor="let dis of popularDishes; let i=index;">
     <div class="media" >
       <img class="align-slef-left" src="/assets/images/RestoBackground.jpg" alt="Generic placeholder image" style="width: 10rem;">
       <div class="media-body">
-        <h5 class="mt-0 title">{{d.name}}</h5>
-        <div class="col-12 description">{{d.description}}</div>
-        <div class="col-12 price">Price: {{d.price}}$
+        <h5 class="mt-0 title">{{dis.name}}</h5>
+        <div class="col-12 description">{{dis.description}}</div>
+        <div class="col-12 price">Price: {{dis.price}}$
           <a href="#" class=" view">View more</a>
         </div>
-      </div>
-      <div class="align-self-center">
-        <button class="btn btn-info btn-sm" [routerLink]="['/edit-dish']" (click)="editDish(d.id)"> Update</button>
-        <button class="btn btn-danger btn-sm" (click)="deleteDish(i)">Delete</button>
       </div>
     </div>
   </div>

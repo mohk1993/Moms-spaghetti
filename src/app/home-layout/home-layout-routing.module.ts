@@ -54,6 +54,10 @@ const routes: Routes = [
         path: 'edit-dish',
         loadChildren: () => import('./dish/edit-dish/edit-dish.module').then(m => m.EditDishModule)
       },
+      {
+        path: 'popular-dish',
+        loadChildren: () => import('./dish/popular-dish/popular-dish.module').then(m => m.PopularDishModule)
+      },
     ]
   },
   

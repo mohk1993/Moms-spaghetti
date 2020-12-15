@@ -23,33 +23,32 @@
 
 
 <div class="container-fluid" >
+    <div class="row title d-flex justify-content-center mt-4 ">Deliveries</div>
     <div class="row row-body d-flex justify-content-center">
-        
         <!-- header -->
         <div class="col-8">
             <div class="row">
-
                 <div class="col-1">
-
+                    Status
                 </div>
                 <div class="col-3">
-                    Deliveries
+                    Comment 
                 </div>
                 <div class="col-2">
-                    <!-- Estimate -->
+                    Start
                 </div>
                 <div class="col-3">
-                    <!-- Start -->
+                    
                 </div>
                 <div class="col-3">
-                    <!-- Finish -->
+                    Finish
                 </div>
 
             </div>
         </div>
 
         <!-- body -->
-        <div class="col-8 table-item shadow cursor-pointer" *ngFor="let delv of deliveries; let i=index;">
+        <div class="col-8 table-item shadow cursor-pointer" *ngFor="let delv of deliveries; let i=index;" (click)="goToDeliveryEmployee(i)">
             <div class="row no-gutters">
                 <div class="col-1 status-colour"
                 [ngClass]="{
@@ -59,17 +58,17 @@
                 }">
 
                 </div>
-                <div class="col-3" style="padding-left: .75rem;">
-              
+                <div class="col-3 text-overflowed-ellipsis" style="padding-left: .75rem;">
+                    {{delv.comment}}
                 </div>
                 <div class="col-2">
                     <!-- 15:00 -->{{delv.createdAt | date: 'short'}}
                 </div>
                 <div class="col-3">
-                    <!-- 2020/11/26 15:48 -->{{delv.requestedDeliveryTime}}
+                    <!-- 2020/11/26 15:48 -->
                 </div>
                 <div class="col-3">
-                    <!-- - -->
+                    <!-- - -->{{delv.deliveryCompleteTime | date: 'short'}}
                 </div>
             </div>
         </div>

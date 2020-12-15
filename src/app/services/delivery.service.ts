@@ -31,8 +31,8 @@ export class DeliveryService {
             error:  (e) => { this.getDeliveriesSubject.next(e);     }
         });
     }
-    getdelivery(id: string) {
-        this.http.get(environment.key + 'orders/' + id).subscribe({
+    getdelivery(order_id: string) {
+        this.http.get(environment.key + 'orders/' + order_id+'/deliveries').subscribe({
             next: (res) => { this.getDeliverySubject.next(res);   },
             error:  (e) => { this.getDeliverySubject.next(e);     }
         });

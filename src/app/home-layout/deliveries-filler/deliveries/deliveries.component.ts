@@ -27,8 +27,6 @@ getAllDeliveriesSubscription: Subscription;
       next: (res) =>{
         if(!(res.error)){
           this.deliveries =res;
-          console.log(this.deliveries)
-          console.log(res);
         }else {
           console.log(res);
         }
@@ -38,5 +36,7 @@ getAllDeliveriesSubscription: Subscription;
   ngOnDestroy() {
     if(this.getAllDeliveriesSubscription) this.getAllDeliveriesSubscription.unsubscribe();
   }
-
+  goToDeliveryEmployee(i: number) {
+    this.route.navigate(['deliveries/employee'], { queryParams: { Delivery_id: this.deliveries[i].id.toString() }});
+  }
 }
