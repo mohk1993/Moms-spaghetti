@@ -20,14 +20,18 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router, public authService: AuthService) {
     let token = localStorage.getItem('refreshToken');
     if((token)) {
+      
+      this.authService.token          = localStorage.getItem('accessToken'); 
+      this.authService.refresh_token  = localStorage.getItem('refreshToken'); 
+
       if(!this.authService.admin && !this.authService.employee && !this.authService.customer)
         this.authService.refreshSession(token);
-      else
+      else 
         this.timer = setInterval(() => {
           token = localStorage.getItem('refreshToken');
           this.authService.refreshSession(token)
         }, 5 * 60 * 1000);
-    }else this.router.navigate(['/login'])
+    } else this.router.navigate(['/login'])
   }
 
   logoutSubscription: Subscription;
