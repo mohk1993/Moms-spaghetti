@@ -55,8 +55,9 @@ export class ReservationsComponent implements OnInit, OnDestroy {
   }
   goToReservation(i: number, target: string) {
     if(target != 'action') {
+      console.log(this.auth.customer);
       if(this.auth.customer) this.router.navigate(['/reservations/create'], { queryParams: { reservation_id: this.reservations[i].id.toString() } });
-    this.router.navigate(['/reservations/single'], { queryParams: { reservation_id: this.reservations[i].id.toString() } });
+      else this.router.navigate(['/reservations/single'], { queryParams: { reservation_id: this.reservations[i].id.toString() } });
     }
   }
   removeReservation(i: number) {

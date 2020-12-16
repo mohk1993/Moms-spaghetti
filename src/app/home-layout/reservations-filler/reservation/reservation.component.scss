@@ -1,0 +1,68 @@
+@import '../../../../assets/scss-library/colours.scss';
+
+.add-comment-text {
+    color: $lighter_black;
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    margin-bottom: .75rem .25rem;
+}
+.add-comment {
+
+    width: 40vw;
+    height: 8rem;
+    border: 2px solid $inactive;
+    border-radius: 4px;
+
+    padding: .75rem .5rem;
+}
+
+
+.number-of-people {
+    margin-top: 1.5rem;
+    color: $lighter_black;
+    font-size: 1.5rem;
+    font-weight: 800;
+    b {
+        color: $inactive;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+}
+
+.reservation-information {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.special-occasion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $lighter_black;
+    border-radius: 4px;
+
+
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.4rem;
+}
+.occasion-active {
+    background-color: $dark;
+    color: $green_good;
+}
+.time-container {
+    margin-left: 1.25rem;
+    color: $lighter_black;
+    font-size: 1.05rem;
+    font-weight: 700;
+
+    .time-body {
+        .time-header {
+            color: $inactive;
+            font-size: .95rem;
+            font-weight: 600;
+        }
+    }
+}

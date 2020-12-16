@@ -34,13 +34,11 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
     comment: null,
   };
   dishes: Array<Dish>;
-  order_dishes: Array<Order_dish>;
   
   constructor(private readonly route:ActivatedRoute, private router: Router,
     private orderService: OrderService, private dishService: dishServices) {
 
     this.dishes = new Array<Dish>();
-    this.order_dishes = new Array<Order_dish>();
     this.dishService.getAllDishes();
   }
 
@@ -87,7 +85,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
   }
   getTotal() {
     let total = 0;
-    this.order_dishes.forEach(dish => {
+    this.order.orderDishes.forEach(dish => {
       total = dish.total;
     });
     return total ? total : 0;
@@ -100,7 +98,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
   state: string;
   orderCreate(id: string) {
     this.state = id;
-    this.orderService.postOrder(this.order, this.order_dishes);
+    this.orderService.postOrder(this.order);
   }
   
 
@@ -108,16 +106,17 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
     let temp = <Dish>JSON.parse(JSON.stringify(this.dishes[i]));
     temp.quantity = val;
     this.order.dishes.push(temp);
-    this.order_dishes.push(<Order_dish>{
+    this.order.orderDishes.push(<Order_dish>{
       dishId: this.dishes[i].id,
       orderId: null,
       quantity: val,
+      profitMargin: this.dishes[i].profitMargin,
       total: this.dishes[i].price * val
     });
   }
   removeDish(i: number) {
-    this.order_dishes.splice(i, 1);
     this.order.dishes.splice(i, 1);
+    this.order.orderDishes.splice(i, 1);
   }
 
 }

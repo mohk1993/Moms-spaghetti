@@ -28,14 +28,14 @@
                             <div class="content-description">{{ dish.description }}</div>
                             <div class="flex-grow-1"></div>
                             <div class="add-to-order">
-                                <div><b>QTY:</b> {{ order_dishes[i].quantity }}</div>
+                                <div><b>QTY:</b> {{ order.orderDishes[i].quantity }}</div>
                                 <button class="btn btn-danger d-flex justify-content-center align-items-center" style="font-size: 1.25rem; font-weight: 700;" (click)="removeDish(i)">-</button>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;" *ngIf="order_dishes && order_dishes.length > 0">
+                    <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;" *ngIf="order.orderDishes && order.orderDishes.length > 0">
                         <div class="col-12 d-flex justify-content-center">
                             <button class="btn btn-primary" style="margin-right: .75rem;" (click)="orderCreate('delivery')">Delivery</button>
                             <button class="btn btn-success" style="margin-right: .75rem;" (click)="orderCreate('pick-up')">Pick up</button>
