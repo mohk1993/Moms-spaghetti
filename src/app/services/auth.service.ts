@@ -30,6 +30,9 @@ export class AuthService {
     registerSubject = new Subject<any>();
     registerEmployeeSubject = new Subject<any>();
 
+    getEmployeesSubject = new Subject<any>();
+    getEmployeeSubject = new Subject<any>();
+
 
     login(email: string, password: string) {
         this.http.post(environment.key + 'session', {
@@ -101,6 +104,19 @@ export class AuthService {
 
         });
 
+    }
+
+    getEmployees() {
+        this.http.get(environment.key + 'employees').subscribe({
+            next: (res) => { this.getEmployeesSubject.next(res); },
+            error:  (e) => { this.getEmployeesSubject.next(e); }
+        });
+    }
+    getEmployee(id: string) {
+        this.http.get(environment.key + 'employees/' + id).subscribe({
+            next: (res) => { this.getEmployeeSubject.next(res); },
+            error:  (e) => { this.getEmployeeSubject.next(e); }
+        });
     }
 
 }

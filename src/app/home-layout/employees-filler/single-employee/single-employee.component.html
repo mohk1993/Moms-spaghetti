@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row no-gutters d-flex justify-content-center" style="width: 100%;">
+        <div class="col-8">
+
+            <!-- name --><!-- surname -->
+            <div class="employee-name">
+                <span>
+                    {{ employee.name | titlecase }}
+                    {{ " " }}
+                    {{ employee.surname | titlecase }}
+                </span>
+            </div>
+            <div class="employee-information">
+                <div>
+                    <div class='segment'>
+                        <div class="section">
+                            <div class="information-header">Email</div>
+                            {{ employee.email }}
+                            <div class="information-header">Address</div>
+                            {{ employee.address }}
+                            <div class="information-header">Email</div>
+                            {{ employee.email }}
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="section">
+                            <div class="information-header">Birth date</div>
+                            {{ employee.dateOfBirth | date: 'yyyy/MM/dd' }}
+                            <div class="information-header">Phone number</div>
+                            {{ employee.phoneNumber }}
+                        </div>
+                    </div>
+                    <div class="h-line">
+                        <hr>
+                    </div>
+                    <div class='segment'>
+                        <div class="employee-bankaccount">
+                            <div class="information-header">Bank account</div>
+                            <div class="bankaccount">{{ employee.bankAccount}}</div>
+                        </div>
+                    </div>
+                    <div class="segment">
+                        <div class="section"> 
+                            <div class="information-header">salary</div>
+                            {{ employee.salary }}
+                        </div>
+                        <div class="flex-grow-1"></div>
+                        <div class="section">
+                            <div class="information-header">Workload</div>
+                            {{ employee.workload | number: '0.0-2' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

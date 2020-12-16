@@ -99,7 +99,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
   orderCreate(id: string) {
     console.log(id, this.order, this.order_dishes);
     this.state = id;
-    // this.orderService.postOrder(this.order, this.order_dishes);
+    this.orderService.postOrder(this.order, this.order_dishes);
   }
   
 

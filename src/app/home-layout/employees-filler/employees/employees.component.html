@@ -1,28 +1,35 @@
 <div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Employees page</h4>
-        </div>
-
-        <div style="padding: 3rem 0;"></div>
-
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/']" style="margin: 0 .75rem;">Main page/Home</button>
-            <button [routerLink]="['/employees/single']" style="margin: 0 .75rem;">Employee page</button>
-        </div>
-
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div class="row">
+    <div class="row row-body d-flex justify-content-center">
         
+        <!-- adder -->
+        <div class="col-8"> 
+            <button class="btn btn-success" (click)="createEmployee()">Create</button>
+        </div>
+        <!-- header -->
+        <div class="col-8" style="margin-top: 1.5rem;">
+            <div class="row no-gutters">
+
+                <div class="col-4" style="padding-left: .75rem;">
+                    Name
+                </div>
+                <div class="col-4">
+                    Surname
+                </div>
+                <div class="col-4">
+                    Email
+                </div>
+
+            </div>
+        </div>
+
+        <!-- body -->
+        <div class="col-8 table-item shadow cursor-pointer" *ngFor="let employee of employees; let i = index" (click)="checkEmployee(i)">
+            <div class="row no-gutters">
+                <div class="col-4">{{ employee.name | titlecase }}</div>
+                <div class="col-4">{{ employee.surname | titlecase }}</div>
+                <div class="col-4">{{ employee.email }}</div>
+            </div>
+        </div>
+
     </div>
 </div>
