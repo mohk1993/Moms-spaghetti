@@ -64,7 +64,7 @@
                             <div class="content-description">{{ dish.description }}</div>
                             <div class="flex-grow-1"></div>
                             <div class="add-to-order">
-                                <input type="number" placeholder="QTY" #quantity value="1" min="1" max="99" (input)="noLower($event)"><button class="btn btn-success" (click)="addDish(i, quantity.value); quantity.value = 1">Add</button>
+                                <input type="number" placeholder="QTY" #quantity value="1" min="1" max="99" (change)="noLower($event)"><button class="btn btn-success" (click)="addDish(i, quantity.value); quantity.value = 1">Add</button>
                             </div>
 
                         </div>
