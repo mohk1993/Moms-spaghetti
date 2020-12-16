@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ReservationsFillerComponent } from './reservations-filler.component';
 
-import { ReservationsComponent } from './reservations/reservations.component';
 
 
 const routes: Routes = [
@@ -22,6 +21,10 @@ const routes: Routes = [
       },
       {
         path: 'create',
+        loadChildren: () => import('./reservation-form/reservation-form.module').then(m => m.ReservationFormModule)
+      },
+      {
+        path: ':id',
         loadChildren: () => import('./reservation-form/reservation-form.module').then(m => m.ReservationFormModule)
       }
     ]
