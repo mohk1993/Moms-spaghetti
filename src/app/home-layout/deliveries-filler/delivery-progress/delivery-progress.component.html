@@ -5,18 +5,38 @@
             <div class="row no-gutters" style="width: 100%;">
                 <div class="col-12 d-flex flex-column align-items-center">
 
-                    <div class="order-number">
+                    <div class="delivery-status">
+                        {{delivery.deliveryStatus}} Status
                     </div>
-                    <div class="order-total">
+                    <div class="delivery-createdAt">
+                        Created at: {{delivery.createdAt | date: 'short'}} 
                     </div>
-                    <div class="order-comment shadow">
+                    <div class="delivery-comment shadow">
+                        {{delivery.comment}} comment
+                    </div>
+                    <div class="delivery-comment shadow">
+                        {{delivery.location}} location
                     </div>
 
-                    <!-- dishes -->
-                   
-
+                    <!-- delivery -->
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Delivery Type</th>
+                            <th scope="col">Requested Delivery Time</th>
+                            <th scope="col">Delivery Complete Time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{delivery.deliveryType}} Delivery Type</td>
+                            <td>{{delivery.requestedDeliveryTime | date: 'short'}} Requested Delivery Time</td>
+                            <td>{{delivery.deliveryCompleteTime | date: 'short'}} Delivery Complete Time</td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
                     
-
                 </div>
             </div>
         </div>
