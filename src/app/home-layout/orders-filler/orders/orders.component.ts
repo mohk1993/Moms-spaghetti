@@ -16,7 +16,6 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
 
   getOrdersSubscription: Subscription;
-  postOrdersSubscription: Subscription;
 
   constructor(private router: Router,
     public auth: AuthService,
@@ -38,37 +37,21 @@ export class OrdersComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.postOrdersSubscription = this.orderService.postOrderSubject.subscribe({
-      next: (res) => {
-        if(!res.error) {
-          console.log(res);
-          this.router.navigate(['orders/single'], { queryParams: { order_id: res.id.toString() }});
-        } else console.log(res);
-      }
-    })
+    
   }
   ngOnDestroy() {
     if(this.getOrdersSubscription) this.getOrdersSubscription.unsubscribe();
   }
 
   goToOrder(i: number) {
-    this.router.navigate(['orders/single'], { queryParams: { order_id: this.orders[i].id.toString() }});
+    this.router.navigate(['/orders/single'], { queryParams: { order_id: this.orders[i].id.toString() }});
   }
   goToDelivery(i: number) {
     this.router.navigate(['orders/delivery'], { queryParams: { order_id: this.orders[i].id.toString() }});
   }
  
   createOrder() {
-    this.orderService.postOrder(<Order>{
-      id: null,
-      orderNumber: null,
-      status: null,
-      total: 0,
-
-      dishes: [],
-      
-      comment: null,
-    });
+    this.router.navigate(['/orders/create']);
   }
 
   cancellation_dialog: boolean = false;

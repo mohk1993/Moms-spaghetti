@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: () => import('./reservation/reservation.module').then(m => m.ReservationModule)
       },
       {
-        path: 'form',
+        path: 'create',
         loadChildren: () => import('./reservation-form/reservation-form.module').then(m => m.ReservationFormModule)
       }
     ]

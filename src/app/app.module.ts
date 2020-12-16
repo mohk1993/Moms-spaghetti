@@ -12,6 +12,7 @@ import { StandardInterceptor } from './interceptor';
 import { dishServices } from './services/dish.service';
 import { OrderService } from './services/order.service';
 import { DeliveryService } from './services/delivery.service';
+import { ReservationService } from './services/reservation.service';
 import { reviewService } from './services/review.service';
 
 
@@ -38,6 +39,7 @@ import { reviewService } from './services/review.service';
     dishServices,
     OrderService,
     DeliveryService,
+    ReservationService,
     reviewService
   ],
   bootstrap: [AppComponent]

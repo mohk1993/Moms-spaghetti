@@ -22,7 +22,11 @@ const routes: Routes = [
       {
         path: 'delivery',
         loadChildren: () => import('./order-delivery/order-delivry.module').then(m => m.OrderDeliveryModule)
-      }
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('./create-order/create-order.module').then(m => m.CreateOrderModule)
+      },
     ]
   }
 ];

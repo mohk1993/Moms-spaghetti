@@ -1,22 +1,57 @@
 <div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
+    <div class="row row-body d-flex justify-content-center">
+        
+        <!-- adder -->
+        <div class="col-8" *ngIf="auth.customer" > 
+            <button class="btn btn-success" (click)="createReservation()">Create</button>
         </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Reservations page</h4>
+        <!-- header -->
+        <div class="col-8">
+            <div class="row no-gutters">
+
+                <div class="col-1">
+                    
+                </div>
+                <div class="col-3" style="padding-left: .75rem;">
+                    Start time
+                </div>
+                <div class="col-3">
+                    End time
+                </div>
+                <div class="col-3">
+                    Comment
+                </div>
+                <div class="col-1 d-flex justify-content-end">
+                    People
+                </div>
+                <div class="col-1"></div>
+
+            </div>
         </div>
 
-        <div style="padding: 3rem 0;"></div>
+        <!-- body -->
+        <div class="col-8 table-item shadow cursor-pointer" *ngFor="let reserve of reservations; let i = index" (click)="goToReservation(i, $event.target.id)">
+            <div class="row no-gutters">
+                <div class="col-1 d-flex align-items-center">
+                    <i class="fas fa-birthday-cake" *ngIf="reserve.specialOccasion"></i>
+                </div>
+                <div class="col-3 d-flex align-items-center">
+                    {{ reserve.startTime | date: 'yyyy/MM/dd HH:mm' }}
+                </div>
+                <div class="col-3 d-flex align-items-center">
+                    {{ reserve.endTime | date: 'yyyy/MM/dd HH:mm' }}
+                </div>
+                <div class="col-3 d-flex align-items-center text-overflowed-ellipsis">
+                    {{ reserve.comment }}
+                </div>
+                <div class="col-1 d-flex justify-content-end align-items-center">
+                    {{ reserve.numberOfPeople | number: '0.0-0' }}
+                </div>
+                <div class="col-1 d-flex justify-content-end align-items-center">
+                    <button class="btn btn-danger" id="action" (click)="removeReservation(i)">X</button>
+                </div>
 
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/']" routerLinkActive="router-link-active"  style="margin: 0 .75rem;">Main page/Home</button>
-            <button [routerLink]="['/reservations/single']" routerLinkActive="router-link-active"  style="margin: 0 .75rem;">Reservation page</button>
-            <button [routerLink]="['/reservations/form']" routerLinkActive="router-link-active"  style="margin: 0 .75rem;">Make reservation</button>
+            </div>
         </div>
 
     </div>

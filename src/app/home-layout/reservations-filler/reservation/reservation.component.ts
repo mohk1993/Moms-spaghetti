@@ -7,15 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ReservationComponent {
 
-  constructor() {}
-
-  cancellation_dialog: boolean = false;
-  experience_dialog: boolean = false;
-
-  openCancellation() { this.cancellation_dialog = true; }
-  closeCancellation(e: boolean) { this.cancellation_dialog = false; }
+  reservationID: string;
 
 
-  openExperience() { this.experience_dialog = true; }
-  closeExperience(e: boolean) { this.experience_dialog = false; }
+  constructor() {
+    // this.reservationID = param["reservation_id"];
+
+    //   if(this.reservationID == null){
+    //     this.router.navigate(["/"]);
+    //   } else this.reservationService.getReservation(this.reservationID);
+  }
 }
