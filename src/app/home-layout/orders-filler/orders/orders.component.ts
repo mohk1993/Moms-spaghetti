@@ -49,7 +49,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
   }
   goToDelivery(i: number) {
-    this.router.navigate(['orders/delivery'], { queryParams: { order_id: this.orders[i].id.toString() }});
+    this.router.navigate(['deliveries/progress'], { queryParams: { order_id: this.orders[i].id.toString() }});
   }
  
   createOrder() {
