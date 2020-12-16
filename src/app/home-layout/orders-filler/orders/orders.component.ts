@@ -43,8 +43,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
     if(this.getOrdersSubscription) this.getOrdersSubscription.unsubscribe();
   }
 
-  goToOrder(i: number) {
-    this.router.navigate(['/orders/single'], { queryParams: { order_id: this.orders[i].id.toString() }});
+  goToOrder(i: number,target:string) {
+    if(target != 'action'){
+      this.router.navigate(['/orders/single'], { queryParams: { order_id: this.orders[i].id.toString() }});
+    }
   }
   goToDelivery(i: number) {
     this.router.navigate(['orders/delivery'], { queryParams: { order_id: this.orders[i].id.toString() }});

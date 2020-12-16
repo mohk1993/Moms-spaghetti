@@ -68,9 +68,9 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
           console.log(res);
           switch(this.state) {
             case 'reservation' :
-              this.router.navigate(['reservations/single'], { queryParams: { order_id: res.id.toString() }});
+              this.router.navigate(['reservations/create'], { queryParams: { order_id: res.id.toString() }});
             case 'delivery' :
-              this.router.navigate(['deliveries/single'], { queryParams: { order_id: res.id.toString() }});
+              this.router.navigate(['orders/delivery'], { queryParams: { order_id: res.id.toString() }});
             case 'pick-up' :
               this.router.navigate(['orders/']);
           };
@@ -97,7 +97,6 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
   state: string;
   orderCreate(id: string) {
-    console.log(id, this.order, this.order_dishes);
     this.state = id;
     this.orderService.postOrder(this.order, this.order_dishes);
   }
