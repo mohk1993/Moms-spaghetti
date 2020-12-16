@@ -1,2 +1,24 @@
+@import '../../../../assets/scss-library/colours.scss';
+
 .container-fluid {
+    height: 100%;
+    background-color: $darker_white;
+
+    .row-body {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+.table-item {
+
+    margin: .75rem 0;
+    padding: 0.75rem 1.25rem;
+    
+    border: 2px solid $dark;
+    border-radius: 4px;
+
+    color: $lighter_black;
+    font-size: 1.05rem;
+    font-weight: 600;
+    
 }

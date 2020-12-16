@@ -72,13 +72,19 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   create() {
     try {
-      var dateOfBirth = 
-      (this.year_selected+1918).toString() 
-      + '-' +
-      (this.month_selected+1 > 10 ? this.month_selected+1 : '0'+(this.month_selected+1)).toString()
-      + '-' +
-      (this.day_selected+1 > 10 ? this.day_selected+1 : '0'+(this.day_selected+1)).toString()
-      + 'T00:00:00Z';
+      let year_date = this.year_selected++;
+      year_date += 1918;
+      let month_date = this.month_selected++;
+      let day_date = this.day_selected++;
+
+      var dateOfBirth = "";
+      dateOfBirth += year_date.toString(); 
+      dateOfBirth += '-';
+      dateOfBirth += month_date > 10 ? month_date.toString() : '0' + month_date.toString();
+      dateOfBirth += '-';
+      dateOfBirth += day_date > 10 ? day_date.toString() : '0' + day_date.toString()
+      dateOfBirth += 'T00:00:00Z';
+      console.log(dateOfBirth);
 
     } catch (e) { console.log(e); }
 
