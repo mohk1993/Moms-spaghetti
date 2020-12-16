@@ -1,25 +1,39 @@
 <div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Reservation page</h4>
-        </div>
+    <div class="row">    
+        <div class="col-12">
+            <div class="row d-flex justify-content-center">
+                <div class="col-8 d-flex flex-column align-items-center">
 
-        <div style="padding: 3rem 0;"></div>
+                    <div class="add-comment-text" style="margin-top: 3.5rem">
+                        Comment
+                    </div>
+                    <div class="add-comment shadow">{{ reservation.comment }}</div>
 
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
+                    <div class="number-of-people">
+                        <b>Number of people:</b> {{ reservation.numberOfPeople | number: '0.0-0' }}
+                    </div>
+                    <div class="reservation-information">
+                        <div class="special-occasion" [ngClass]="{'occasion-active': reservation.specialOccasion }">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <div class="time-container"> 
+                            <div class="time-body">
+                                <!-- start-end date -->
+                                <div class="time-header">Date</div>
+                                {{ reservation.startTime | date: 'yyyy/MM/dd' }} 
+                                <span *ngIf="displayEndDate">- {{ reservation.endTime | date: 'yyyy/MM/dd' }}</span>
+                            </div>
+                            <div class="time-body">
+                                <!-- start-end time -->
+                                <div class="time-header">Time</div>
+                                {{ reservation.startTime | date: 'HH:mm' }} - 
+                                {{ reservation.endTime | date: 'HH:mm' }}
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/reservations']" style="margin: 0 .75rem;">Reservations page</button>
-            <button [routerLink]="['/reservations/form']" style="margin: 0 .75rem;">Edit reservation</button>
-            <button [routerLink]="['/menu']" style="margin: 0 .75rem;">Menu page</button>
-            <!-- <button (click)="openCancellation()" style="margin: 0 .75rem;">Cancellation dialog</button>
-            <button (click)="openExperience()" style="margin: 0 .75rem;">Rate experience</button> -->
-        </div>
-
     </div>
 </div>

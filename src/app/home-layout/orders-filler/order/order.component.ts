@@ -32,7 +32,7 @@ export class OrderComponent implements OnInit, OnDestroy{
     comment: null,
   };
   dishes: Array<Dish>;
-  options: Array<string> = new Array<string>('waiting', 'preparing', 'completed', 'cancelled');
+  options: Array<string> = new Array<string>('awaiting', 'preparing', 'completed', 'canceled');
 
   constructor(private readonly route:ActivatedRoute, private router: Router,
     public readonly auth: AuthService,

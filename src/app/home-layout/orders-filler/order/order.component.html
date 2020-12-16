@@ -13,7 +13,7 @@
                     <div class="order-comment shadow">
                         {{ order.comment | titlecase }}
                     </div>
-                    <div class="order-status" *ngIf="auth.employee || auth.admin || (auth.customer && order.status == 'waiting')">
+                    <div class="order-status" *ngIf="auth.employee || auth.admin || (auth.customer && order.status == 'awaiting')">
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
