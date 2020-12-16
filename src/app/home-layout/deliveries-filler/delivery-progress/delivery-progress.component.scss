@@ -1,0 +1,36 @@
+@import '../../../../assets/scss-library/colours.scss';
+
+.order-number {
+    color: $lighter_black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 2rem;
+}
+.order-total {
+    color: $lighter_black;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: .25rem;
+
+    border-bottom: 2px solid $lighter_black;
+    width: fit-content;
+    
+}
+.order-comment {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    width: 40vw;
+    height: 5vw;
+
+    border: 2px solid $lighter_black;
+    border-radius: 8px;
+    background-color: $darker_white;
+
+    color: $lighter_black;
+    font-weight: 500;
+    font-size: 1.25rem;
+
+
+}

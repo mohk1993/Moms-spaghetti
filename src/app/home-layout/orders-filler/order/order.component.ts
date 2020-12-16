@@ -24,9 +24,10 @@ export class OrderComponent implements OnInit, OnDestroy{
     id: null,
     orderNumber: null,
     status: null,
-    total: null,
-
-    dishes: [],
+    price: null,
+    delivery:null,
+    dishes: new Array<Dish>(),
+    orderDishes:new Array<Order_dish>(),
     
     comment: null,
   };

@@ -1,30 +1,24 @@
+
 <div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Change delivery progress page</h4>
-        </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-8 d-flex flex-column align-items-center">
+            <div class="row no-gutters" style="width: 100%;">
+                <div class="col-12 d-flex flex-column align-items-center">
 
-        <div style="padding: 3rem 0;"></div>
+                    <div class="order-number">
+                    </div>
+                    <div class="order-total">
+                    </div>
+                    <div class="order-comment shadow">
+                    </div>
 
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/deliveries/single']" style="margin: 0 .75rem;">Delivery page</button>
-            <button (click)="openCancellation()" style="margin: 0 .75rem;">Cancellation dialog</button>
-            <button (click)="openExperience()" style="margin: 0 .75rem;">rate experience dialog</button>
-        </div>
+                    <!-- dishes -->
+                   
 
+                    
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="custom-dialog" *ngIf="cancellation_dialog">
-    <app-cancellation-dialog (close)="closeCancellation($event)"></app-cancellation-dialog>
-</div>
-<div class="custom-dialog" *ngIf="experience_dialog">
-    <app-rate-experience-dialog (close)="closeExperience($event)"></app-rate-experience-dialog>
 </div>
