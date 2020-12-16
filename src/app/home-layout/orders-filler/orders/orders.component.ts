@@ -54,6 +54,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
   goToOrder(i: number) {
     this.router.navigate(['orders/single'], { queryParams: { order_id: this.orders[i].id.toString() }});
   }
+  goToDelivery(i: number) {
+    this.router.navigate(['orders/delivery'], { queryParams: { order_id: this.orders[i].id.toString() }});
+  }
+ 
   createOrder() {
     this.orderService.postOrder(<Order>{
       id: null,
