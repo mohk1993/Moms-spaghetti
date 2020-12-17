@@ -78,13 +78,13 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
     let year = new Date().getFullYear().toString();
       year += '-';
-      year += (new Date().getMonth() + 1) > 10 ? (new Date().getMonth() + 1).toString() : '0'+(new Date().getMonth() + 1).toString(); 
+      year += (new Date().getMonth() + 1) >= 10 ? (new Date().getMonth() + 1).toString() : '0'+(new Date().getMonth() + 1).toString(); 
       year += '-';
-      year += new Date().getDate() > 10 ? new Date().getDate().toString() : "0"+new Date().getDate().toString();
+      year += new Date().getDate() >= 10 ? new Date().getDate().toString() : "0"+new Date().getDate().toString();
 
-      let time = new Date().getHours() > 10 ? new Date().getHours().toString() : "0"+new Date().getHours().toString();
+      let time = new Date().getHours() >= 10 ? new Date().getHours().toString() : "0"+new Date().getHours().toString();
       time += ":"
-      time+= new Date().getMinutes() > 10 ? new Date().getMinutes().toString() : '0'+new Date().getMinutes().toString();
+      time+= new Date().getMinutes() >= 10 ? new Date().getMinutes().toString() : '0'+new Date().getMinutes().toString();
 
       this.deliveryDate = year.toString();
       this.deliveryTime = time.toString();

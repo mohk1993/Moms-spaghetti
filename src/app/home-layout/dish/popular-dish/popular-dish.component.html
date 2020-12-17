@@ -28,7 +28,7 @@
   </div>
   <div class="row justify-content-center" *ngFor="let dis of popularDishes; let i=index;">
     <div class="media" >
-      <img class="align-slef-left" src="/assets/images/RestoBackground.jpg" alt="Generic placeholder image" style="width: 10rem;">
+      <img class="align-slef-left" src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ dis.id }}/image" alt="Generic placeholder image" style="width: 10rem;">
       <div class="media-body">
         <h5 class="mt-0 title">{{dis.name}}</h5>
         <div class="col-12 description">{{dis.description}}</div>
