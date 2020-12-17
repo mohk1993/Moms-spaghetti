@@ -25,7 +25,7 @@
     <div class="row no-gutters d-flex justify-content-center">
         <div class="col-8 form-input shadow">
             <div class="section-label mt-4 d-flex justify-content-center">
-                Reviews Information
+                Reviews
             </div>
             <div class="separator">
                 <hr> 
@@ -34,14 +34,14 @@
                 <div class="col">
                   {{rev.comment}}
                 </div>
-                <div class="col-md-auto">
-                  {{rev.rating}}
+                <div class="col col-lg-2">
+                  {{"⭐️".repeat(rev.rating) + "☆".repeat(5 - rev.rating)}}
                 </div>
                 <div class="col col-lg-2">
-                  Star
-                </div>
-                <div class="col col-lg-2">
-                    <a href="#" [routerLink]="['/reviews/single']" (click)="editReview(rev.id)">See more</a>
+                    <a *ngIf="rev.deliveryId" [routerLink]="['/deliveries/single']"
+                      (click)="goToDelivery(rev.deliveryId)">Delivery</a>
+                    <a *ngIf="rev.reservationId" [routerLink]="['/reservations/single']"
+                      (click)="goToReservation(rev.reservationId)">Reservation</a>
                   </div>
             </div>
         </div>
