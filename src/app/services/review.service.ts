@@ -15,6 +15,9 @@ export class reviewService {
     getAllReviewsSubject = new Subject<any>();
     getReviewSubject = new Subject <any>();
 
+    postDeliveryReviewSubject = new Subject<any>();
+    postReservationReviewSubject = new Subject<any>();
+
     constructor(private readonly auth: AuthService,private http: HttpClient){}
 
     reviews: Reviews;
@@ -32,6 +35,21 @@ export class reviewService {
             error: (e) => { this.getReviewSubject.next(e);}
         });
     }
+
+    postReservationReview(id: string, review: Review) {
+        this.http.post(environment.key + 'reservations/' + id + '/review', review).subscribe({
+            next: (res) => { this.postReservationReviewSubject.next(res); },
+            error:  (e) => { this.postReservationReviewSubject.next(e); },
+        });
+    }
+    postDeliveryReview(id: string, review: Review) {
+        this.http.post(environment.key + 'deliveries/' + id + '/review', review).subscribe({
+            next: (res) => { this.postDeliveryReviewSubject.next(res); },
+            error:  (e) => { this.postDeliveryReviewSubject.next(e); },
+        });
+    }
+
+    
 
 }
 

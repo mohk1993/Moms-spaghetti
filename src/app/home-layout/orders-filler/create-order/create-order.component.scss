@@ -30,6 +30,39 @@
         border-color: $lightest_inactive;
     }
 }
+
+.delivery-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+
+    .header-text {
+        margin-top: .75rem;
+        color: $lighter_black;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    input {
+        color: $lighter_black;
+        border: 2px solid $inactive;
+        border-radius: 4px;
+
+        padding: .1rem .2rem;
+
+        max-width: 12rem;
+
+        &:hover {
+            border-color: $dark;
+        }
+        &:active {
+            border-color: $lightest_inactive;
+        }
+        &:focus {
+            border-color: $lightest_inactive;
+        }
+    }
+}
 .dish-item {
     border: 2px solid $inactive;
     border-radius: 10px;
@@ -99,4 +132,8 @@
     font-weight: 700;
     font-size: 1.35rem;
     color: $lighter_black;
+}
+img {
+    width: 100%;
+    height: 100%;
 }

@@ -16,7 +16,7 @@ const routes: Routes = [
         loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule)
       },
       {
-        path: 'single',
+        path: 'create',
         loadChildren: () => import('./review/review.module').then(m => m.ReviewModule)
       }
     ]

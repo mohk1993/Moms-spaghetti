@@ -44,17 +44,8 @@ export class DeliveryService {
         });
     }
 
-    postDelivery(order_id: string, comment: string, createdAt: string,deliveryCompleteTime: string, deliveryStatus: string, deliveryType: string,location: string, requestedDeliveryTime: string,reviewId: number) {
-        this.http.post(environment.key + 'orders/' + order_id + '/delivery',{
-            comment:comment,
-            createAt:createdAt,
-            deliveryCompleteTime:deliveryCompleteTime,
-            deliveryStatus:deliveryStatus,
-            deliveryType:deliveryType,
-            location:location,
-            requestedDeliveryTime:requestedDeliveryTime,
-            reviewId:reviewId
-        } ).subscribe({
+    postDelivery(order_id: string, delivery: Delivery) {
+        this.http.post(environment.key + 'orders/' + order_id + '/delivery', delivery).subscribe({
             next: (res) => { this.postDeliverySubject.next(res);   },
             error:  (e) => { this.postDeliverySubject.next(e);     }
         });

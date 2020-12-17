@@ -24,6 +24,7 @@ export class DeliveryProgressComponent {
   delivery: Delivery = {
     comment: null,
     createdAt: null,
+    deliveryPrice: null,
     deliveryCompleteTime: null,
     deliveryStatus: null,
     deliveryType: null,

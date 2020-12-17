@@ -4,8 +4,39 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-8 d-flex flex-column align-items-center">
 
-                    <div class="add-comment-text" style="margin-top: 3.5rem">Add a comment</div>
+                    <div class="add-comment-text" style="margin-top: 3.5rem">Add a order comment</div>
                     <textarea name="" id="" class="add-comment shadow" [(ngModel)]="order.comment"></textarea>
+
+
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text">Pick delivery type:</label>
+                            </div>
+                            <select class="custom-select" [(ngModel)]="order.delivery.deliveryType" aria-placeholder="Choose..." required="required" >
+                                <option [value]="'take-away'" >{{ "take-away" }}</option>
+                                <option [value]="'delivery'" >{{ "delivery" }}</option>
+                            </select>
+                            
+                        </div>   	
+                    </div>
+
+                    <!-- delivery section -->
+                    <div class="d-flex flex-column align-items-center" style="width: 100%;" *ngIf="order.delivery.deliveryType == 'delivery'">
+
+                        <div class="d-flex justify-content-start delivery-inputs">
+                            <div class="text-header">Address</div>
+                            <input type="text" [(ngModel)]="order.delivery.location">
+                        </div>
+                        <div class="d-flex justify-content-start delivery-inputs">
+                            <div class="text-header">Specify delivery time</div>
+                            <input type="date" [(ngModel)]="deliveryDate">
+                            <input type="time" [(ngModel)]="deliveryTime">
+                        </div>
+                        <div class="add-comment-text" style="margin-top: 3.5rem">Add a comment to delivery</div>
+                        <textarea name="" id="" class="add-comment shadow" [(ngModel)]="order.delivery.comment"></textarea>
+                        
+                    </div>
 
                     <!-- overview -->
                     <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;">
@@ -51,7 +82,7 @@
                     </div>
 
                     <div class="row no-gutters" style="width: 100%;">
-                        <div class="col-12 dish-item d-flex flex-row" *ngFor="let dish of dishes; let i = index">
+                        <div class="col-12 dish-item d-flex flex-row align-items-center" *ngFor="let dish of dishes; let i = index">
 
                             <div class="image">
                                 <img src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ dish.id }}/image" alt="">

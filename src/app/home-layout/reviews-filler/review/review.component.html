@@ -1,40 +1,25 @@
-<!-- <div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Review page</h4>
-        </div>
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100%;">
+    <div class="review-box shadow">
 
-        <div style="padding: 3rem 0;"></div>
+        <div class="star-belt">
 
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/reviews']" style="margin: 0 .75rem;">Reviews page</button>
-        </div>
+            <!-- filled -->
+            <i class="fas fa-star" (click)="changeRating(1)" *ngIf="review.rating >= 1"></i>
+            <i class="fas fa-star" (click)="changeRating(2)" *ngIf="review.rating >= 2"></i>
+            <i class="fas fa-star" (click)="changeRating(3)" *ngIf="review.rating >= 3"></i>
+            <i class="fas fa-star" (click)="changeRating(4)" *ngIf="review.rating >= 4"></i>
+            <i class="fas fa-star" (click)="changeRating(5)" *ngIf="review.rating == 5"></i>
 
-    </div>
-</div> -->
-<div class="container-fluid">
-    <div class="row no-gutters d-flex justify-content-center">
-        <table class="table table-dark mt-4">
-            <thead>
-            <tr>
-                <th scope="col-8">Comment</th>
-                <th scope="col">Rating</th>
-                <th scope="col"><button type="button" [routerLink]="['/reviews']" style="margin: 0 .75rem;">Go Back</button></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td >{{review.comment}}</td>
-                <td >{{review.rating}}</td>
-            </tr>
-            </tbody>
-        </table>
+            <!-- empty -->
+            <i class="far fa-star" (click)="changeRating(review.rating+1)" *ngIf="5 > review.rating"></i>
+            <i class="far fa-star" (click)="changeRating(review.rating+2)" *ngIf="4 > review.rating"></i>
+            <i class="far fa-star" (click)="changeRating(review.rating+3)" *ngIf="3 > review.rating"></i>
+            <i class="far fa-star" (click)="changeRating(review.rating+4)" *ngIf="2 > review.rating"></i>
+        </div>
+        <div class="header-text">Comment</div>
+        <textarea name="" id="" [(ngModel)]="review.comment" placeholder="comment"></textarea>
+
+        <button class="btn btn-success" style="margin-top: .75rem; margin-bottom: 2rem;" (click)="createReview()">Leave review</button>
+
     </div>
 </div>

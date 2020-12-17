@@ -5,6 +5,8 @@ import { Delivery } from 'src/app/interfaces/delivery.interface';
 import { Dish } from 'src/app/interfaces/dish.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { Order_dish } from 'src/app/interfaces/order_dish.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { DeliveryService } from 'src/app/services/delivery.service';
 import { dishServices } from 'src/app/services/dish.service';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -22,24 +24,60 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
   putOrderDishSubscription: Subscription;
   getDishesSubscription: Subscription;
 
+  postDeliverySubscription: Subscription;
+
   order: Order = {
     id: null,
     orderNumber: null,
     status: null,
     price: null,
-    delivery:null,
+    delivery: <Delivery>{
+      id: null,
+      orderId: null,
+      reviewId: null,
+  
+      comment: null,
+      location: null,
+  
+      deliveryStatus: null,
+      deliveryType: 'take-away',
+  
+      deliveryCompleteTime: null,
+      requestedDeliveryTime: null,
+  
+      createdAt: null,
+    }, 
     dishes: new Array<Dish>(),
     orderDishes:new Array<Order_dish>(),
     
     comment: null,
   };
   dishes: Array<Dish>;
+
+  deliveryDate: string;
+  deliveryTime: string;
   
   constructor(private readonly route:ActivatedRoute, private router: Router,
-    private orderService: OrderService, private dishService: dishServices) {
+    private readonly auth: AuthService,
+    private orderService: OrderService, private dishService: dishServices, private deliveryService: DeliveryService) {
 
+      if(this.auth.customer)
+        this.order.delivery.location = this.auth.customer.address ? this.auth.customer.address : null;
     this.dishes = new Array<Dish>();
     this.dishService.getAllDishes();
+
+    let year = new Date().getFullYear().toString();
+      year += '-';
+      year += (new Date().getMonth() + 1) > 10 ? (new Date().getMonth() + 1).toString() : '0'+(new Date().getMonth() + 1).toString(); 
+      year += '-';
+      year += new Date().getDate() > 10 ? new Date().getDate().toString() : "0"+new Date().getDate().toString();
+
+      let time = new Date().getHours() > 10 ? new Date().getHours().toString() : "0"+new Date().getHours().toString();
+      time += ":"
+      time+= new Date().getMinutes() > 10 ? new Date().getMinutes().toString() : '0'+new Date().getMinutes().toString();
+
+      this.deliveryDate = year.toString();
+      this.deliveryTime = time.toString();
   }
 
   ngOnInit() {
@@ -69,19 +107,33 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
           switch(this.state) {
             case 'reservation' :
               this.router.navigate(['reservations/create'], { queryParams: { order_id: res.id.toString() }});
+              break;
             case 'delivery' :
-              this.router.navigate(['orders/delivery'], { queryParams: { order_id: res.id.toString() }});
-            case 'pick-up' :
-              this.router.navigate(['orders/']);
+              this.order.delivery.orderId = res.id;
+              this.deliveryService.postDelivery(res.id.toString(), this.order.delivery);
+            // case 'pick-up' :
+              // this.router.navigate(['orders/']);
           };
           this.state = null;
         } else console.log(res);
       }
     });
+    this.postDeliverySubscription = this.deliveryService.postDeliverySubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+          console.log(res);
+          this.router.navigate(['delivery/progress'], { queryParams: { order_id: res.orderId.toString() }});
+        } console.log(res);
+      }
+    })
+
     
   }
   ngOnDestroy() {
-
+    if(this.getDishesSubscription) this.getDishesSubscription.unsubscribe();
+    if(this.postOrdersSubscription) this.postOrdersSubscription.unsubscribe();
+    if(this.putOrderDishSubscription) this.putOrderDishSubscription.unsubscribe();
+    if(this.postDeliverySubscription) this.postDeliverySubscription.unsubscribe();
   }
   getTotal() {
     let total = 0;
@@ -97,6 +149,9 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
   state: string;
   orderCreate(id: string) {
+    this.order.delivery.requestedDeliveryTime = this.deliveryDate+"T"+this.deliveryTime+":00";
+
+
     this.state = id;
     this.orderService.postOrder(this.order);
   }
