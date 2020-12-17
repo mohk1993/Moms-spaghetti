@@ -14,6 +14,7 @@ import { ReservationService } from 'src/app/services/reservation.service';
 export class ReservationFormComponent implements OnInit, OnDestroy {
 
   reservationID: string;
+  orderID: string;
   reservation: Reservation = {
     "id": null,
     "orderId": null,
@@ -63,15 +64,26 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe(params => {
       this.reservationID = params['reservation_id'];
+      this.orderID = params['order_id'];
       if(this.reservationID == null) {
         this.create = true;
-        let id = null; 
-        id = this.router.url.substring(this.router.url.lastIndexOf('/')+1);
-        console.log(id);
-        if(id != null && id != '' && id != 'create') {
-          this.reservationService.getReservation(id);
-          this.reservationID = id;
-          this.create = false;
+        if(this.orderID == null) {
+          let id: string  = null; 
+          id = this.router.url.substring(this.router.url.lastIndexOf('/')+1);
+          
+          console.log(id);
+          if(id.indexOf('create') != -1) id = id.substring(id.indexOf('create')+6);
+          if(id.lastIndexOf('=') != -1) id = id.substring(id.lastIndexOf('=')+1);
+          console.log(id);
+          if(id != null && id != '') {
+            this.reservationService.getReservation(id);
+            this.reservationID = id;
+            this.create = false;
+          }
+        } else try {
+          this.reservation.orderId = parseInt(this.orderID); 
+        } catch(e) {
+          console.log(e);
         }
       }
       else {
@@ -88,7 +100,14 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
         if(!res.error) {
 
           console.log(res);
-          this.router.navigate(['/reservations']);
+          switch(this.state) {
+            case 'order':
+              this.router.navigate(['/orders/create'], { queryParams: { reservation_id: res.id }});
+              break;
+            case 'reservation':
+              this.router.navigate(['/reservations']);
+              break;
+          }
 
         } else console.log(res);
       }

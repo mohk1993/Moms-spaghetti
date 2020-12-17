@@ -8,7 +8,7 @@
                     <textarea name="" id="" class="add-comment shadow" [(ngModel)]="order.comment"></textarea>
 
 
-                    <div class="form-group" style="margin-top: 1.5rem;">
+                    <div class="form-group" style="margin-top: 1.5rem;" *ngIf="reservationID == null">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Pick delivery type:</label>
