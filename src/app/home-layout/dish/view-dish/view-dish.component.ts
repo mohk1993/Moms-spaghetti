@@ -16,6 +16,7 @@ import { from } from 'rxjs';
 export class ViewDishComponent implements OnInit, OnDestroy {
 
   dish_id:string;
+  back_url: string;
   dish: Dish = {
     id: null,
 
@@ -41,6 +42,7 @@ export class ViewDishComponent implements OnInit, OnDestroy {
   constructor(private auth:AuthService, private dishService: dishServices, public router: Router, public route:ActivatedRoute){
     this.route.queryParams.subscribe(params => {
       this.dish_id = params['dish_id'];
+      this.back_url = params['back_url'];
       console.log(params['dish_id']);
       if(this.dish_id)
         this.dishService.getDish(this.dish_id);
@@ -64,5 +66,11 @@ export class ViewDishComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     if(this.getDishSubscription) this.getDishSubscription.unsubscribe();
+  }
+
+  return() {
+    console.log(this.back_url);
+    if(this.back_url) window.location.assign(this.back_url);
+    else this.router.navigate(['/dishes']);
   }
 }

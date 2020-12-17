@@ -46,7 +46,8 @@ export class OrderService {
 
     postOrder(order: Order) {
         this.http.post(environment.key + 'orders', {
-            order: order
+            comment: order.comment,
+            orderDishes: order.orderDishes,
         }).subscribe({
             next: (res) => { this.postOrderSubject.next(res);   },
             error:  (e) => { this.postOrderSubject.next(e);     }
