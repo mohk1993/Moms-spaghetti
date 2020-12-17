@@ -55,7 +55,7 @@ export class AddDishComponent implements OnInit, OnDestroy {
             document.getElementById('file').click();
           } else this.router.navigate(['/dish']);
 
-        } else console.log('error', res);
+        } else this.router.navigate(['/dish']);
       }
     });
     this.createDishImageSubscription = this.dishService.createDishImageSubject.subscribe({
