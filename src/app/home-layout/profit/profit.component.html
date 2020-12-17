@@ -1,20 +1,52 @@
 <div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Profit page</h4>
-        </div>
+    <div class="row no-gutters" style="padding-top: 2rem;">
 
-        <div style="padding: 3rem 0;"></div>
-
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
+        <div class="col-12 d-flex justify-content-center graph-header">
+            Sales during this week
         </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/']" style="margin: 0 .75rem;">Main page</button>
+        <div class="col-lg-6 col-12 d-flex justify-content-center align-items-end" *ngIf="!loading">
+            <ngx-charts-bar-vertical
+                [view]="[ 500, 300 ]"
+                [scheme]="colorScheme"
+                [results]="horizontal_bar"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]="''"
+                [yAxisLabel]="'money'">
+            </ngx-charts-bar-vertical>
+        </div>
+        <div class="col-lg-6 col-12 d-flex justify-content-center" *ngIf="!loading">
+            <ngx-charts-pie-chart
+                [view]="[ 500, 500 ]"
+                [scheme]="colorScheme"
+                [results]="horizontal_bar"
+                [gradient]="false"
+                [legend]="false"
+                [labels]="true"
+                [doughnut]="true">
+            </ngx-charts-pie-chart>
+        </div>
+        <div class="col-12 d-flex justify-content-center graph-header">
+            Overall profits
+        </div>
+        <div class="col-12 d-flex justify-content-center" *ngIf="!loading">
+            <ngx-charts-line-chart
+                [scheme]="colorScheme"
+                [legend]="false"
+                [showXAxisLabel]="false"
+                [showYAxisLabel]="false"
+                [xAxis]="false"
+                [yAxis]="true"
+                [autoScale]="true"
+                [gradient]="true"
+                [results]="line"
+                [yScaleMin]="0"
+                [curve]="curve"
+            ></ngx-charts-line-chart>
         </div>
 
     </div>

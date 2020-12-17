@@ -9,10 +9,18 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  host: {
+    '(document:keypress)': 'handleKeyboardEvent($event)'
+  }
 })
 export class LoginComponent implements OnInit, OnDestroy {
   
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key == 'Enter')
+      this.login();
+  }
+
   timer;
   refreshSubscription: Subscription;
   constructor(private router: Router, private authService: AuthService) {

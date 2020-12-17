@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ProfitRoutingModule } from './profit-routing.module';
 import { ProfitComponent } from './profit.component';
@@ -9,7 +10,7 @@ import { ProfitComponent } from './profit.component';
   ],
   imports: [
     ProfitRoutingModule,
-    
+    NgxChartsModule
   ]
 })
 export class ProfitModule { }

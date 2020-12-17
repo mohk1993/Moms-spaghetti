@@ -1,7 +1,10 @@
 import { Component,OnDestroy,OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Delivery } from 'src/app/interfaces/delivery.interface';
+import { Order } from 'src/app/interfaces/order.interface';
 import { DeliveryService } from 'src/app/services/delivery.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-delivery-employee',
@@ -9,7 +12,8 @@ import { DeliveryService } from 'src/app/services/delivery.service';
   styleUrls: ['./delivery-employee.component.scss']
 })
 export class DeliveryEmployeeComponent implements OnInit, OnDestroy{
-  deliveryId:string;
+  
+  orderID:string;
   delivery:Delivery ={
     comment: null,
     createdAt: null,
@@ -17,35 +21,49 @@ export class DeliveryEmployeeComponent implements OnInit, OnDestroy{
     deliveryStatus: null,
     deliveryType: null,
     id: null,
+    orderId: null,
     location: null,
     requestedDeliveryTime: null,
     reviewId: null
   }
-  constructor(private readonly route:ActivatedRoute,private delieryService:DeliveryService, private router: Router) {
-    this.route.queryParams.subscribe(param=>{
-      this.deliveryId=param["deliveryId"];
-      if(this.deliveryId)
-        this.delieryService.getdelivery(this.deliveryId);
+
+  getDeliverySubscription: Subscription;
+  updateDeliverySubscription: Subscription;
+
+  options: Array<string> = new Array<string>('waiting', 'delivering', 'delivered');
+  constructor(private readonly route:ActivatedRoute, private router: Router,
+    private orderService: OrderService, private deliveryService: DeliveryService) {
+    this.route.queryParams.subscribe(param => {
+      this.orderID = param["order_id"];
+      if (this.orderID)
+        this.orderService.getOrder(this.orderID);
       else
         this.router.navigate['/employee'];
-        console.log(this.deliveryId)
-      // if(this.deliveryId==null){
-      //   this.router.navigate(["/"]);
-      // }
-    })
-    // console.log(new Date().toISOString())
+      if (this.orderID == null) {
+        // this.router.navigate(["/"]);
+      }
+    });
   }
 
   ngOnInit(){
-
+    this.getDeliverySubscription = this.orderService.getOrderSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+          console.log(res);
+          this.delivery = <Delivery>(<Order>res).delivery;
+        } console.log(res);
+      }
+    });
+    
   }
 
   ngOnDestroy(){
-
+    if(this.getDeliverySubscription) this.getDeliverySubscription.unsubscribe();
+  }
+  
+  statusChange(status: string) {
+    this.delivery.deliveryStatus = status;
+    this.deliveryService.putDelivery(this.delivery.id.toString(), this.delivery)
   }
 
-  cancellation_dialog: boolean = false;
-
-  openCancellation() { this.cancellation_dialog = true; }
-  closeCancellation(e: boolean) { this.cancellation_dialog = false; }
 }

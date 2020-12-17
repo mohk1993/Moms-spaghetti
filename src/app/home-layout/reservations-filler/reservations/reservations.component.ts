@@ -55,13 +55,11 @@ export class ReservationsComponent implements OnInit, OnDestroy {
   }
   goToReservation(i: number, target: string) {
     if(target != 'action') {
-      console.log(this.auth.customer);
       if(this.auth.customer) this.router.navigate(['/reservations/create'], { queryParams: { reservation_id: this.reservations[i].id.toString() } });
       else this.router.navigate(['/reservations/single'], { queryParams: { reservation_id: this.reservations[i].id.toString() } });
     }
   }
   removeReservation(i: number) {
-    console.log(this.reservations[i].startTime);
     let time = new Date(this.reservations[i].startTime).toTimeString() + ' - \n' + new Date(this.reservations[i].endTime).toTimeString()
     if(confirm("Are you sure you want to delete reservation \n" + time + '?'))
       this.reservationService.deleteReservation(this.reservations[i].id.toString());

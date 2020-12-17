@@ -15,11 +15,8 @@
         </div>
         <div class="col-12 d-flex justify-content-center">
             <button [routerLink]="['/deliveries']" style="margin: 0 .75rem;">Delivery page</button>
-            <button (click)="openConfirmation()" style="margin: 0 .75rem;">Confirm status</button>
+            <!-- <button (click)="openConfirmation()" style="margin: 0 .75rem;">Confirm status</button> -->
         </div>
 
     </div>
-</div>
-<div class="custom-dialog" *ngIf="confirmation_dialog">
-    <app-confirmation-dialog (close)="closeConfirmation($event)"></app-confirmation-dialog>
 </div>

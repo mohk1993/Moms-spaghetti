@@ -55,7 +55,8 @@
                     <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;">
                         <div class="col-12 d-flex justify-content-center">
                             <button class="btn btn-primary" style="margin-right: .75rem;" (click)="createReservation('delivery')">Add order</button>
-                            <button class="btn btn-success" (click)="createReservation('reservation')">Make reservation</button>
+                            <button *ngIf="create" class="btn btn-success" (click)="createReservation('reservation')">Make reservation</button>
+                            <button *ngIf="!create" class="btn btn-success" (click)="getReservation()">Download reservation</button>
                         </div>
                     </div>
 

@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="row no-gutters d-flex justify-content-center">
+
+      <div class="col-4 form-input shadow">
+
+          <!-- dish information -->
+          <div class="section-label">
+              Dish Information
+          </div>
+          <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
+            <img src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ dish.id }}/image" alt="">
+          </div>
+          <div class="form-group">
+            <div class="text-header">Name</div>
+            {{ dish.name }}
+          </div>
+          <div class="form-group">
+            <div class="text-header">Description</div>
+            {{ dish.description }}
+          </div>
+          <div class="form-group">
+            <div class="text-header">Nutritional Information</div>
+            {{ dish.nutritionalInformation }}
+          </div>
+          <div class="form-group">
+            <div class="text-header">Allergen Information</div>
+            {{ dish.allergenInformation }}
+          </div>
+
+          <div class="separator">
+             <hr> 
+          </div>
+
+          <div class="form-group">
+            <div class="text-header">Price</div>
+            ${{ dish.price }}
+          </div>
+          <div class="form-group">
+            <div class="text-header">Quantity</div>
+            {{ dish.quantity }}
+          </div>
+          <div class="form-group">
+            <div class="text-header">Profit margin</div>
+            {{ dish.profitMargin * 100 }}%
+          </div>
+          <div class="form-group">
+            <div class="text-header">Alcohol content</div>
+            {{ dish.alcoholContent * 100 }}%
+          </div>
+        
+          <div class="separator">
+              <hr> 
+          </div>
+
+          <div class="form-group">
+            <div class="text-header">
+              Keto
+              <i class="far fa-check-circle" *ngIf="dish.keto"></i>
+              <i class="far fa-times-circle" *ngIf="!dish.keto"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="text-header">
+              Vegan
+              <i class="far fa-check-circle" *ngIf="dish.vegan"></i>
+              <i class="far fa-times-circle" *ngIf="!dish.vegan"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="text-header">
+              Vegetarian
+              <i class="far fa-check-circle" *ngIf="dish.vegetarian"></i>
+              <i class="far fa-times-circle" *ngIf="!dish.vegetarian"></i>
+            </div>
+          </div>
+          
+
+          <div class="separator">
+              <hr> 
+          </div>
+
+          <div class="form-group d-flex justify-content-center">
+              <div class="col-xs-8 col-xs-offset-4">
+                <button class="btn btn-success" [routerLink]="['/dish']">Return</button>
+              </div>  
+          </div>		
+          
+      </div>
+
+
+
+  </div>
+</div>

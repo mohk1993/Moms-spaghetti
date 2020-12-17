@@ -26,10 +26,8 @@ getAllDeliveriesSubscription: Subscription;
     this.getAllDeliveriesSubscription = this.deliveryService.getDeliveriesSubject.subscribe({
       next: (res) =>{
         if(!(res.error)){
-          this.deliveries =res;
-        }else {
-          console.log(res);
-        }
+          this.deliveries= <Array<Delivery>>res;
+        } console.log(res);
       }
     });
   }
@@ -37,6 +35,6 @@ getAllDeliveriesSubscription: Subscription;
     if(this.getAllDeliveriesSubscription) this.getAllDeliveriesSubscription.unsubscribe();
   }
   goToDeliveryEmployee(i: number) {
-    this.route.navigate(['deliveries/employee'], { queryParams: { Delivery_id: this.deliveries[i].id.toString() }});
+    this.route.navigate(['deliveries/employee'], { queryParams: { order_id: this.deliveries[i].orderId.toString() }});
   }
 }

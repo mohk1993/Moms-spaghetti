@@ -18,7 +18,7 @@
                         <div class="col-12 dish-item d-flex flex-row" *ngFor="let dish of order.dishes; let i = index">
 
                             <div class="image">
-                                image
+                                <img src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ dish.id }}/image" alt="">
                             </div>
                             <div class="content">
                                 <div class="content-name">{{ dish.name }}</div>
@@ -54,7 +54,7 @@
                         <div class="col-12 dish-item d-flex flex-row" *ngFor="let dish of dishes; let i = index">
 
                             <div class="image">
-                                image
+                                <img src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ dish.id }}/image" alt="">
                             </div>
                             <div class="content">
                                 <div class="content-name">{{ dish.name }}</div>

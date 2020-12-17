@@ -15,6 +15,7 @@ import { PopularDish } from '../interfaces/popular-dish.interface';
 export class dishServices {
 
 createDishSubject = new Subject<any>();
+createDishImageSubject = new Subject<any>();
 
 getAllDishesSubject = new Subject<any>();
 getPopularDishesSubject = new Subject<any>();
@@ -43,6 +44,16 @@ createDish(name: string, description: string, price: number, profitMargin: numbe
         error:  (e) => { this.createDishSubject.next(e); }
     });
 }
+createDishImage(id:string, file: File) {
+    let image:FormData = new FormData();
+    image.append('file', file);
+    
+    this.http.post(environment.key + 'dishes/' + id + '/image', image).subscribe({
+        next: (res) => { this.createDishImageSubject.next(res); },
+        error:  (e) => { this.createDishImageSubject.next(e); }
+    });
+}
+ 
 
 getAllDishes(){
     this.http.get(environment.key+'dishes').subscribe({

@@ -59,18 +59,30 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
       this.endDate = year.toString();
       this.endTime = time.toString();
 
+
+
     this.route.queryParams.subscribe(params => {
       this.reservationID = params['reservation_id'];
-      if(this.reservationID == null) this.create = true;
+      if(this.reservationID == null) {
+        this.create = true;
+        let id = null; 
+        id = this.router.url.substring(this.router.url.lastIndexOf('/')+1);
+        console.log(id);
+        if(id != null && id != '' && id != 'create') {
+          this.reservationService.getReservation(id);
+          this.reservationID = id;
+          this.create = false;
+        }
+      }
       else {
         this.create = false;
         this.reservationService.getReservation(this.reservationID);
       }
     });
+    
   }
   create: boolean = true;
   ngOnInit() {
-    console.log('oninit')
     this.postReservationSubscription = this.reservationService.postReservationSubject.subscribe({
       next: (res) => {
         if(!res.error) {
@@ -92,7 +104,10 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
           this.endDate = this.reservation.endTime.toString().split('T')[0];
           this.endTime = this.reservation.endTime.toString().split('T')[1].split('Z')[0].substring(0, 5);
 
-        } else console.log(res);
+        } else {
+          console.log(res);
+          this.router.navigate(['/reservations']);
+        }
       }
     });
     this.putReservationSubscription = this.reservationService.putReservationSubject.subscribe({
@@ -134,6 +149,9 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
 
     }
 
+  }
+  getReservation() {
+    if(!this.create) window.open('https://moms-spaghetti.herokuapp.com/api/v1/calendars/' + this.reservation.calendarUuid,'popUpWindow','height=400,width=600,left=10,top=10,,scrollbars=yes,menubar=no')
   }
 
 

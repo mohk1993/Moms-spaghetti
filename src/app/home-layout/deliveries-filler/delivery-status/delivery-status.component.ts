@@ -9,9 +9,4 @@ export class DeliveryStatusComponent {
 
   constructor() {}
 
-  confirmation_dialog: boolean = false;
-
-  openConfirmation() { this.confirmation_dialog = true; }
-  closeConfirmation(e: boolean) { this.confirmation_dialog = false; }
-
 }

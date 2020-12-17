@@ -26,6 +26,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy{
     deliveryStatus: null,
     deliveryType: null,
     id: null,
+    orderId: null,
     location: null,
     requestedDeliveryTime: null,
     reviewId: null

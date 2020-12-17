@@ -33,25 +33,40 @@ export class AddDishComponent implements OnInit, OnDestroy {
     nutritionalInformation: null,
     allergenInformation: null,
   }
-  createdishSubscription: Subscription;
 
+  image: File;
+  
+  createdishSubscription: Subscription;
+  createDishImageSubscription: Subscription;
   constructor(private auth:AuthService, private dishService: dishServices, public router: Router, public route:ActivatedRoute) {
 
   }
+  created: boolean = false;
+
   ngOnInit() {
     this.createdishSubscription = this.dishService.createDishSubject.subscribe({
       next: (res) => {
         if(!res.error) {
           console.log(res);
 
-          this.router.navigate(['/dish']);
-
+          this.dish = <Dish>res;
+          if(confirm('Do you wish to add image?')) {
+            this.created = true;
+            document.getElementById('file').click();
+          } else this.router.navigate(['/dish']);
 
         } else console.log('error', res);
       }
     });
+    this.createDishImageSubscription = this.dishService.createDishImageSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+          this.router.navigate(['/dish'])
+        } console.log(res);
+      }
+    });
+    
   }
-
 
   ngOnDestroy() {
     if(this.createdishSubscription) this.createdishSubscription.unsubscribe();
@@ -72,6 +87,18 @@ export class AddDishComponent implements OnInit, OnDestroy {
         this.dish.vegetarian,
         this.dish.keto,
       );
+  }
+
+  imageUrl: string;
+  changeImage(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+    this.dishService.createDishImage(this.dish.id.toString(), file);
+    (document.getElementById('file') as HTMLInputElement).value = '';
   }
 
 }
