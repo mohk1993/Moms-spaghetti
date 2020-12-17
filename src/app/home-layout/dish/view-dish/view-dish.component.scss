@@ -9,12 +9,25 @@
         padding-bottom: 4rem;
     }
 }
+.form-group {
+    color: $lightest_gray;
+    font-weight: 600;
+    font-size: .9rem;
+    .text-header {
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+}
 .form-input {
     background-color: $dark;
 
     padding: 2.5rem 2rem;
 
     border-radius: 4px;
+
+    label{
+        color: $lightest_gray;
+    }
 
     .section-label {
         color: $lightest_gray;
@@ -39,6 +52,7 @@
         border: none;
         margin-top: 1.5rem;
         margin-bottom: -1.25rem;
+        margin-left: 1rem;
         min-width: 140px;
         &:hover, &:focus {
             background: #41cba9;
@@ -46,18 +60,16 @@
         }
     }
 }
-.delivery-text {
-    color: $lightest_gray;
-    font-size: .9rem;
-    font-weight: 600;
-    .text-header {
-        margin-top: .75rem;
-        margin-bottom: .15rem;
-        color: $lightest_gray;
-        font-size: 1.05rem;
-        font-weight: 700;
-    }
+img {
+    width: 8rem;
+    height: auto;
+    border-radius: 8px;
 }
-
+.fa-check-circle {
+    color: $green_good;
+}
+.fa-times-circle {
+    color: $error;
+}
 
 

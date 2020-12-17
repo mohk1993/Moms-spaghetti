@@ -1,27 +1,3 @@
-<!--<div class="container-fluid">
-    <div class="row">
-    
-        <div class="col-12 d-flex justify-content-center">
-            <h1>Welcome to</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <h4>Dishs page</h4>
-        </div>
-
-        <div style="padding: 3rem 0;"></div>
-
-        <div class="col-12 d-flex justify-content-center">
-            <h2>Navigate to</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button [routerLink]="['/']" style="margin: 0 .75rem;">Main page/Home</button>
-            <button (click)="openDelete()" style="margin: 0 .75rem;">Remove dish confirmation dialog</button>
-            <button (click)="openConfirmation()" style="margin: 0 .75rem;">Update dish confirmation dialog</button>
-        </div>
-
-    </div>
-</div>-->
-
 <div class="container-flui">
   <div class="row justify-content-center" >
     <div class="btn btn-success " [routerLink]="['/add-dish']">Add New Dish </div>
@@ -29,12 +5,12 @@
   </div>
   <div class="row justify-content-center" *ngFor="let d of dishes; let i=index;">
     <div class="media" >
-      <img class="align-slef-left" src="/assets/images/RestoBackground.jpg" alt="Generic placeholder image" style="width: 10rem;">
+      <img class="align-self-left" src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ d.id }}/image" alt="Generic placeholder image" style="width: 10rem;">
       <div class="media-body">
         <h5 class="mt-0 title">{{d.name}}</h5>
         <div class="col-12 description">{{d.description}}</div>
         <div class="col-12 price">Price: {{d.price}}$
-          <a href="#" class=" view">View more</a>
+          <a [routerLink]="['/view-dish']" [queryParams]="{ dish_id: d.id }" class="view">View more</a>
         </div>
       </div>
       <div class="align-self-center">
@@ -43,14 +19,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-<div class="custom-dialog" *ngIf="update_dish_dialog">
-    <app-confirmation-dialog (close)="closeConfirmation($event)"></app-confirmation-dialog>
-</div>
-<div class="custom-dialog" *ngIf="remove_dish_dialog">
-    <app-delete-dialog (close)="closeDelete($event)"></app-delete-dialog>
 </div>

@@ -7,6 +7,12 @@
           <div class="section-label">
               Dish Information
           </div>
+          <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%;">
+            <input type="file" [(ngModel)]="image" (change)="changeImage($event)" id="file" #file style="visibility: hidden; position: absolute;" accept="image/png, image/jpeg">
+            <img [src]="imageUrl" alt="" *ngIf="imageUrl">
+            <img src="https://moms-spaghetti.herokuapp.com/api/v1/dishes/{{ dish.id }}/image" alt="" *ngIf="!imageUrl">
+            <button class="btn btn-success" (click)="file.click()" style="margin-bottom: 1.5rem; margin-top: .75rem;">Change Image</button>
+          </div>
           <div class="form-group">
               <input type="text" class="form-control" placeholder="Dish Name"  [(ngModel)]="dish.name">
           </div>

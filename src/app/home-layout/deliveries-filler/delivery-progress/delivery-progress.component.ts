@@ -28,6 +28,7 @@ export class DeliveryProgressComponent {
     deliveryStatus: null,
     deliveryType: null,
     id: null,
+    orderId: null,
     location: null,
     requestedDeliveryTime: null,
     reviewId: null

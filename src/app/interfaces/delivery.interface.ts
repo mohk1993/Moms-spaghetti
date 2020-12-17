@@ -1,11 +1,16 @@
 export interface Delivery{
+    id: number,
+    orderId: number,
+    reviewId: number
+
     comment: string,
-    createdAt: string,
-    deliveryCompleteTime: string,
+    location: string,
+
     deliveryStatus: string,
     deliveryType: string,
-    id: number,
-    location: string,
+
+    deliveryCompleteTime: string,
     requestedDeliveryTime: string,
-    reviewId: number
+
+    createdAt: string,
 }

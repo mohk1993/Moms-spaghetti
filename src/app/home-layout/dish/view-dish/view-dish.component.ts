@@ -9,11 +9,11 @@ import { from } from 'rxjs';
 
 
 @Component({
-  selector: 'app-edit-dish',
-  templateUrl: './edit-dish.component.html',
-  styleUrls: ['./edit-dish.component.scss']
+  selector: 'app-view-dish',
+  templateUrl: './view-dish.component.html',
+  styleUrls: ['./view-dish.component.scss']
 })
-export class EditDishComponent implements OnInit, OnDestroy {
+export class ViewDishComponent implements OnInit, OnDestroy {
 
   dish_id:string;
   dish: Dish = {
@@ -35,9 +35,7 @@ export class EditDishComponent implements OnInit, OnDestroy {
     nutritionalInformation: null,
     allergenInformation: null,
   }
-  image: File;
   getDishSubscription: Subscription;
-  updateDishSubscription: Subscription;
 
 
   constructor(private auth:AuthService, private dishService: dishServices, public router: Router, public route:ActivatedRoute){
@@ -62,33 +60,9 @@ export class EditDishComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.updateDishSubscription = this.dishService.updateDishSubject.subscribe({
-      next: (res) => {
-        if(!(res.error)){
-          this.router.navigate(['/dish']);
-        }else {
-          console.log(res);
-        }
-      }
-    });
   }
 
   ngOnDestroy(){
     if(this.getDishSubscription) this.getDishSubscription.unsubscribe();
-    if(this.updateDishSubscription) this.updateDishSubscription.unsubscribe();
-  }
-  updateDish(){
-    this.dishService.updateDish(this.dish)
-  }
-  imageUrl: string;
-  changeImage(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageUrl = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-    this.dishService.createDishImage(this.dish.id.toString(), file);
-    (document.getElementById('file') as HTMLInputElement).value = '';
   }
 }

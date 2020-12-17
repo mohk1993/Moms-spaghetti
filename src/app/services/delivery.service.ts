@@ -72,8 +72,8 @@ export class DeliveryService {
             error:  (e) => { this.putDeliverySubject.next(e);     }
         });
     }
-    putDeliveryStatus(id: string, status: string) {
-        this.http.post(environment.key + 'orders/' + id + '/status', status).subscribe({
+    putDeliveryStatus(id: string, delivery: Delivery) {
+        this.http.put(environment.key + 'orders/' + id + '/status', status).subscribe({
             next: (res) => { this.putDeliveryStatusSubject.next(res);   },
             error:  (e) => { this.putDeliveryStatusSubject.next(e);     }
         });
