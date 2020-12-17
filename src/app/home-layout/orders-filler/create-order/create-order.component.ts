@@ -29,7 +29,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
   order: Order = {
     id: null,
     orderNumber: null,
-    status: null,
+    status: "awaiting",
     price: null,
     delivery: <Delivery>{
       id: null,
@@ -39,7 +39,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
       comment: null,
       location: null,
   
-      deliveryStatus: null,
+      deliveryStatus: "awaiting",
       deliveryType: 'take-away',
   
       deliveryCompleteTime: null,
@@ -108,11 +108,9 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
             case 'reservation' :
               this.router.navigate(['reservations/create'], { queryParams: { order_id: res.id.toString() }});
               break;
-            case 'delivery' :
+            case 'pick-up' :
               this.order.delivery.orderId = res.id;
               this.deliveryService.postDelivery(res.id.toString(), this.order.delivery);
-            // case 'pick-up' :
-              // this.router.navigate(['orders/']);
           };
           this.state = null;
         } else console.log(res);
@@ -122,7 +120,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
       next: (res) => {
         if(!res.error) {
           console.log(res);
-          this.router.navigate(['delivery/progress'], { queryParams: { order_id: res.orderId.toString() }});
+          this.router.navigate(['deliveries/progress'], { queryParams: { order_id: res.id.toString() }});
         } console.log(res);
       }
     })
@@ -149,7 +147,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
   state: string;
   orderCreate(id: string) {
-    this.order.delivery.requestedDeliveryTime = this.deliveryDate+"T"+this.deliveryTime+":00";
+    this.order.delivery.requestedDeliveryTime = new Date(this.deliveryDate+"T"+this.deliveryTime+":00").toISOString();
 
 
     this.state = id;

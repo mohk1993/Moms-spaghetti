@@ -68,8 +68,7 @@
 
                     <div class="row no-gutters" style="width: 100%; margin-top: 1.5rem;" *ngIf="order.orderDishes && order.orderDishes.length > 0">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" style="margin-right: .75rem;" (click)="orderCreate('delivery')">Delivery</button>
-                            <button class="btn btn-success" style="margin-right: .75rem;" (click)="orderCreate('pick-up')">Pick up</button>
+                            <button class="btn btn-success" style="margin-right: .75rem;" (click)="orderCreate('pick-up')">Create order</button>
                             <button class="btn btn-dark" (click)="orderCreate('reservation')">Reservation</button>
                         </div>
                     </div>

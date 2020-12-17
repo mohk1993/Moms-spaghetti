@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -45,21 +46,31 @@ export class DeliveryProgressComponent {
 
         if(this.orderId == null){
           this.router.navigate(["/"]);
-        } else this.timer = setInterval(()=>{
+        } else {
           this.orderService.getOrder(this.orderId)
-        },5*60*1000)
+          this.timer = setInterval(()=>{
+            this.orderService.getOrder(this.orderId);
+          }, 2 * 60 * 1000)
+      }
       
       });
   }
 
+  firstRun: boolean = true;
   ngOnInit() {
     this.getOrderSubscription = this.orderService.getOrderSubject.subscribe({
       next: (res) => {
         if(!res.error) {
 
           console.log(res);
-          this.delivery = <Delivery>(<Order>res).delivery
+          this.delivery = <Delivery>(<Order>res).delivery;
 
+          if((<Order>res).status == 'completed' && !this.firstRun) 
+            alert('Your order has been completed, awaiting delivery!')
+          if(this.delivery.deliveryStatus == 'delivered') {
+            alert('Your delivery has been completed!')
+          }
+          this.firstRun = false;
         } else console.log(res);
       }
     });
@@ -67,6 +78,10 @@ export class DeliveryProgressComponent {
   ngOnDestroy() {
     if(this.getOrderSubscription) this.getOrderSubscription.unsubscribe();
     clearInterval(this.timer);
+  }
+
+  goToReview() {
+    this.router.navigate(['/reviews/create'], { queryParams: { delivery_id: this.delivery.id.toString() }})
   }
 }
 

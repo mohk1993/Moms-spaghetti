@@ -6,7 +6,7 @@
                 <div class="col-12 d-flex flex-column align-items-center">
 
                     <div class="delivery-status">
-                        {{delivery.deliveryStatus}} Status
+                        Status: {{delivery.deliveryStatus}}
                     </div>
                     <div class="delivery-createdAt">
                         Created at: {{delivery.createdAt | date: 'short'}} 
@@ -19,7 +19,7 @@
                     </div>
 
                     <!-- delivery -->
-                    <table class="table">
+                    <table class="table" style="margin-top: 1.5rem;">
                         <thead>
                           <tr>
                             <th scope="col">Delivery Type</th>
@@ -29,13 +29,22 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td>{{delivery.deliveryType}} Delivery Type</td>
-                            <td>{{delivery.requestedDeliveryTime | date: 'short'}} Requested Delivery Time</td>
-                            <td>{{delivery.deliveryCompleteTime | date: 'short'}} Delivery Complete Time</td>
+                            <td>{{ delivery.deliveryType }}</td>
+                            <td>{{delivery.requestedDeliveryTime | date: 'yyyy/MM/dd HH:mm'}}</td>
+                            <td>
+                              <span *ngIf="delivery.deliveryCompleteTime">{{delivery.deliveryCompleteTime | date: 'yyyy/MM/dd HH:mm'}}</span>
+                              <span *ngIf="!delivery.deliveryCompleteTime"><b>-</b></span>
+                              
+                            </td>
                           </tr>
                          
                         </tbody>
                       </table>
+
+
+                    <div>
+                      <button *ngIf="delivery.deliveryStatus == 'delivered'" class="btn btn-warning" (click)="goToReview()">Leave review</button>
+                    </div>
                     
                 </div>
             </div>
