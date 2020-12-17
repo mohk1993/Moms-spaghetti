@@ -15,7 +15,10 @@ import { ReservationService } from 'src/app/services/reservation.service';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
-  styleUrls: ['./create-order.component.scss']
+  styleUrls: ['./create-order.component.scss'],
+  host: {
+    '(document:keypress)': 'saveChanges()',
+  }
 })
 export class CreateOrderComponent implements OnInit, OnDestroy{
 
@@ -42,7 +45,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
       comment: null,
       location: null,
   
-      deliveryStatus: "awaiting",
+      deliveryStatus: "waiting",
       deliveryType: 'take-away',
   
       deliveryCompleteTime: null,
@@ -89,6 +92,15 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
       this.route.queryParams.subscribe(params => {
         this.orderId = params['order_id'];
         this.reservationID = params['reservation_id'];
+
+        if(JSON.parse(localStorage.getItem('order'))) {
+          this.order = JSON.parse(localStorage.getItem('order'));
+          if(this.order.delivery) {
+            this.deliveryDate = this.order.delivery.requestedDeliveryTime.split('T')[0];
+            this.deliveryTime = this.order.delivery.requestedDeliveryTime.split('T')[1].substring(0, 5);
+          }
+        }
+
         if(this.reservationID != null) this.reservationService.getReservation(this.reservationID);
       });
   }
@@ -132,6 +144,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
               this.deliveryService.postDelivery(res.id.toString(), this.order.delivery);
           };
           this.state = null;
+          localStorage.removeItem('order');
+
         } else console.log(res);
       }
     });
@@ -152,8 +166,6 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
         } console.log(res);
       }
     });
-
-    
   }
   ngOnDestroy() {
     if(this.getDishesSubscription) this.getDishesSubscription.unsubscribe();
@@ -174,6 +186,10 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
     else if(e.srcElement.value as number >= 99) e.srcElement.value = 99; 
   }
 
+  saveChanges() {
+    localStorage.setItem('order', JSON.stringify(this.order));
+  }
+
   state: string;
   orderCreate(id: string) {
     this.order.delivery.requestedDeliveryTime = new Date(this.deliveryDate+"T"+this.deliveryTime+":00").toISOString();
@@ -186,19 +202,34 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
   addDish(i: number, val: number) {
     let temp = <Dish>JSON.parse(JSON.stringify(this.dishes[i]));
-    temp.quantity = val;
+    temp.quantity = 0;
+    try {
+      temp.quantity = parseInt(val.toString());
+    } catch(e) {
+      temp.quantity = 0;
+      console.log(e);
+    }
     this.order.dishes.push(temp);
     this.order.orderDishes.push(<Order_dish>{
       dishId: this.dishes[i].id,
       orderId: null,
-      quantity: val,
+      quantity: temp.quantity,
       profitMargin: this.dishes[i].profitMargin,
-      total: this.dishes[i].price * val
+      total: this.dishes[i].price * temp.quantity
     });
+    localStorage.setItem('order', JSON.stringify(this.order));
   }
   removeDish(i: number) {
     this.order.dishes.splice(i, 1);
     this.order.orderDishes.splice(i, 1);
+    localStorage.setItem('order', JSON.stringify(this.order));
+  }
+  viewDish(i: number) {
+    localStorage.setItem('order', JSON.stringify(this.order));
+    console.log('hey')
+    this.router.navigate(['/view-dish'], { queryParams: { dish_id: 
+      this.dishes[i].id, 
+      back_url: window.location.href }})
   }
 
 }

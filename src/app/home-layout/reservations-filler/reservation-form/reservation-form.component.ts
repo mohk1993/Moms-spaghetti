@@ -135,6 +135,7 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
             
           console.log(res);
           this.reservationService.getReservation(this.reservationID);
+          this.router.navigate(['/reservations']);
 
         } else console.log(res);
       }
@@ -150,24 +151,16 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
 
     this.reservation.startTime = new Date(this.startDate+"T"+this.startTime+":00");
     this.reservation.endTime = new Date(this.endDate+"T"+this.endTime+":00");
-    if(this.create) {
 
-      console.log(this.reservation);
+    this.state = state;
+    this.reservationService.postReservation(this.reservation);
+  }
+  updateReservation(state: string) {
+    this.reservation.startTime = new Date(this.startDate+"T"+this.startTime+":00");
+    this.reservation.endTime = new Date(this.endDate+"T"+this.endTime+":00");
 
-      this.state = state;
-      console.log(state);
-      this.reservationService.postReservation(this.reservation);
-
-    } else {
-
-      console.log(this.reservation);
-
-      this.state = state;
-      console.log(state);
-      this.reservationService.putReservation(this.reservationID, this.reservation);
-
-    }
-
+    this.state = state;
+    this.reservationService.putReservation(this.reservationID, this.reservation);
   }
   getReservation() {
     if(!this.create) window.open('https://moms-spaghetti.herokuapp.com/api/v1/calendars/' + this.reservation.calendarUuid,'popUpWindow','height=400,width=600,left=10,top=10,,scrollbars=yes,menubar=no')
