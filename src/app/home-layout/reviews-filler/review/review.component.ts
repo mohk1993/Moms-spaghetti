@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { from } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { Reviews } from 'src/app/interfaces/reviews.interfave';
 import { Review } from 'src/app/interfaces/review.interface';
 import { reviewService } from 'src/app/services/review.service';
 @Component({
@@ -15,42 +14,58 @@ import { reviewService } from 'src/app/services/review.service';
 })
 export class ReviewComponent implements OnInit, OnDestroy{
 
-  review_id:string;
-  review: Reviews = {
+  reservationID: string;
+  deliveryID: string;
+
+  review: Review = {
     id: null,
 
     comment: null,
-    rating: null,
+    rating: 1,
     deliveryId: null,
     reservationId: null
   }
 
-  getReviewSubscription: Subscription;
+  postDeliveryReviewSubscription: Subscription;
+  postReservationReviewSubscription: Subscription;
+
   constructor(private auth:AuthService, private reviewService: reviewService, public router: Router,public route:ActivatedRoute) {
 
     this.route.queryParams.subscribe(params => {
-      this.review_id = params['review_id'];
+      this.deliveryID = params['delivery_id'];
+      this.reservationID = params['reservation_id'];
       // console.log(params['review_id']);
-      if(this.review_id)
-        this.reviewService.getReview(this.review_id);
-      else
-        this.router.navigate['/reviews'];
     });
   }
 
   ngOnInit(){
-    this.getReviewSubscription = this.reviewService.getReviewSubject.subscribe({
+    this.postDeliveryReviewSubscription = this.reviewService.postDeliveryReviewSubject.subscribe({
       next: (res) => {
-        if(!(res.error)){
-         this.review = res;
-        }else {
-          console.log(res);
-        }
+        if(!res.error) {
+          this.router.navigate(['/orders']);
+        } console.log(res);
+      }
+    });
+    this.postReservationReviewSubscription = this.reviewService.postReservationReviewSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+          this.router.navigate(['/reservations']);
+        } console.log(res);
       }
     });
   }
   ngOnDestroy(){
-    if(this.getReviewSubscription) this.getReviewSubscription.unsubscribe();
+    if(this.postDeliveryReviewSubscription) this.postDeliveryReviewSubscription.unsubscribe();
+    if(this.postReservationReviewSubscription) this.postReservationReviewSubscription.unsubscribe();
+  }
+
+  changeRating(val: number) {
+    console.log(val)
+    this.review.rating = val;
+  }
+  createReview() {
+    if(this.deliveryID != null) this.reviewService.postDeliveryReview(this.deliveryID, this.review);
+    else if(this.reservationID != null) this.reviewService.postReservationReview(this.reservationID, this.review);
   }
 
 }

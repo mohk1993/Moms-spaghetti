@@ -49,7 +49,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
   }
   goToReview(i: number) {
-    this.router.navigate(['review/create'], { queryParams: { order_id: this.orders[i].id.toString() }});
+    this.router.navigate(['reviews/create'], { queryParams: { order_id: this.orders[i].id.toString() }});
   }
  
   createOrder() {
