@@ -42,10 +42,19 @@ export class ReviewsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    if(this.getAllReviewsSubscription) this.getAllReviewsSubscription.unsubscribe();
-  }
-  editReview(id:number){
-    this.router.navigate(['/reviews/single'], { queryParams: { review_id: id } });
+    if (this.getAllReviewsSubscription)
+      this.getAllReviewsSubscription.unsubscribe();
   }
 
+  goToDelivery(deliveryId: number) {
+    this.router.navigate(["/deliveries/single"], {
+      queryParams: { delivery_id: deliveryId },
+    });
+  }
+
+  goToReservation(reservationId: number) {
+    this.router.navigate(["/reservations/single"], {
+      queryParams: { reservation_id: reservationId },
+    });
+  }
 }
