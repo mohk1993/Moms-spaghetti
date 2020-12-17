@@ -150,6 +150,9 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
     }
 
   }
+  getReservation() {
+    if(!this.create) window.open('https://moms-spaghetti.herokuapp.com/api/v1/calendars/' + this.reservation.calendarUuid,'popUpWindow','height=400,width=600,left=10,top=10,,scrollbars=yes,menubar=no')
+  }
 
 
   changeOccasion() {

@@ -33,6 +33,7 @@ export class AuthService {
     getEmployeesSubject = new Subject<any>();
     getEmployeeSubject = new Subject<any>();
 
+    getProfitsSubject = new Subject<any>();
 
     login(email: string, password: string) {
         this.http.post(environment.key + 'session', {
@@ -116,6 +117,13 @@ export class AuthService {
         this.http.get(environment.key + 'employees/' + id).subscribe({
             next: (res) => { this.getEmployeeSubject.next(res); },
             error:  (e) => { this.getEmployeeSubject.next(e); }
+        });
+    }
+
+    profits() {
+        this.http.get(environment.key + 'profits').subscribe({
+            next: (res) => { this.getProfitsSubject.next(res); },
+            error:  (e) => { this.getProfitsSubject.next(e); },
         });
     }
 
