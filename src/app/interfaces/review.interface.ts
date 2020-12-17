@@ -3,4 +3,6 @@ export interface Review {
 
     comment: string,
     rating: number
+    deliveryId?: number,
+    reservationId?: number,
 }
