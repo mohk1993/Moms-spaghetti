@@ -48,7 +48,7 @@
                     {{ reserve.numberOfPeople | number: '0.0-0' }}
                 </div>
                 <div class="col-1 d-flex justify-content-end align-items-center">
-                    <button class="btn btn-danger" id="action" (click)="removeReservation(i)">X</button>
+                    <button class="btn btn-danger" id="action" *ngIf="auth.customer" (click)="removeReservation(i)">X</button>
                 </div>
 
             </div>

@@ -5,10 +5,12 @@ import { Delivery } from 'src/app/interfaces/delivery.interface';
 import { Dish } from 'src/app/interfaces/dish.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { Order_dish } from 'src/app/interfaces/order_dish.interface';
+import { Reservation } from 'src/app/interfaces/reservation.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { DeliveryService } from 'src/app/services/delivery.service';
 import { dishServices } from 'src/app/services/dish.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
   selector: 'app-create-order',
@@ -18,10 +20,11 @@ import { OrderService } from 'src/app/services/order.service';
 export class CreateOrderComponent implements OnInit, OnDestroy{
 
   orderId:string;
+  reservationID: string;
   
-  // getOrderSubscription: Subscription;
+  getReservationSubscription: Subscription;
   postOrdersSubscription: Subscription;
-  putOrderDishSubscription: Subscription;
+  putReservationSubscription: Subscription;
   getDishesSubscription: Subscription;
 
   postDeliverySubscription: Subscription;
@@ -29,7 +32,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
   order: Order = {
     id: null,
     orderNumber: null,
-    status: null,
+    status: "awaiting",
     price: null,
     delivery: <Delivery>{
       id: null,
@@ -39,7 +42,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
       comment: null,
       location: null,
   
-      deliveryStatus: null,
+      deliveryStatus: "awaiting",
       deliveryType: 'take-away',
   
       deliveryCompleteTime: null,
@@ -52,14 +55,18 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
     
     comment: null,
   };
+  reservation: Reservation;
   dishes: Array<Dish>;
 
   deliveryDate: string;
   deliveryTime: string;
   
+
+  
   constructor(private readonly route:ActivatedRoute, private router: Router,
     private readonly auth: AuthService,
-    private orderService: OrderService, private dishService: dishServices, private deliveryService: DeliveryService) {
+    private orderService: OrderService, private dishService: dishServices, 
+    private deliveryService: DeliveryService, private reservationService: ReservationService) {
 
       if(this.auth.customer)
         this.order.delivery.location = this.auth.customer.address ? this.auth.customer.address : null;
@@ -78,18 +85,15 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
       this.deliveryDate = year.toString();
       this.deliveryTime = time.toString();
+
+      this.route.queryParams.subscribe(params => {
+        this.orderId = params['order_id'];
+        this.reservationID = params['reservation_id'];
+        if(this.reservationID != null) this.reservationService.getReservation(this.reservationID);
+      });
   }
 
   ngOnInit() {
-    this.putOrderDishSubscription = this.orderService.putOrderDishSubject.subscribe({
-      next: (res) => {
-        if(!res.error) {
-
-          console.log(res);
-
-        } else console.log(res);
-      }
-    });
     this.getDishesSubscription = this.dishService.getAllDishesSubject.subscribe({
       next: (res) => {
         if(!res.error) {
@@ -100,19 +104,32 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
         } else console.log(res);
       }
     });
+    this.getReservationSubscription = this.reservationService.getReservationSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+          this.reservation = <Reservation>res;
+          this.order.comment = 'Order for reservation #' + this.reservationID + ' On \n';
+          this.order.comment += this.reservation.startTime + ' - ' + this.reservation.endTime + '\n';
+
+        } console.log(res);
+      }
+    });
     this.postOrdersSubscription = this.orderService.postOrderSubject.subscribe({
       next: (res) => {
         if(!res.error) {
           console.log(res);
-          switch(this.state) {
+          if(this.reservationID) {
+
+            this.reservation.orderId = (<Order>res).id;
+            this.reservationService.putReservation(this.reservationID, this.reservation);
+
+          } else switch(this.state) {
             case 'reservation' :
               this.router.navigate(['reservations/create'], { queryParams: { order_id: res.id.toString() }});
               break;
-            case 'delivery' :
+            case 'pick-up' :
               this.order.delivery.orderId = res.id;
               this.deliveryService.postDelivery(res.id.toString(), this.order.delivery);
-            // case 'pick-up' :
-              // this.router.navigate(['orders/']);
           };
           this.state = null;
         } else console.log(res);
@@ -122,18 +139,28 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
       next: (res) => {
         if(!res.error) {
           console.log(res);
-          this.router.navigate(['delivery/progress'], { queryParams: { order_id: res.orderId.toString() }});
+          this.router.navigate(['deliveries/progress'], { queryParams: { order_id: res.id.toString() }});
         } console.log(res);
       }
-    })
+    });
+    this.putReservationSubscription = this.reservationService.putReservationSubject.subscribe({
+      next: (res) => {
+        if(!res.error) {
+
+          this.router.navigate(['/reservations/single'], { queryParams: { reservation_id: this.reservationID }});
+
+        } console.log(res);
+      }
+    });
 
     
   }
   ngOnDestroy() {
     if(this.getDishesSubscription) this.getDishesSubscription.unsubscribe();
+    if(this.getReservationSubscription) this.getReservationSubscription.unsubscribe();
     if(this.postOrdersSubscription) this.postOrdersSubscription.unsubscribe();
-    if(this.putOrderDishSubscription) this.putOrderDishSubscription.unsubscribe();
     if(this.postDeliverySubscription) this.postDeliverySubscription.unsubscribe();
+    if(this.putReservationSubscription) this.putReservationSubscription.unsubscribe();
   }
   getTotal() {
     let total = 0;
@@ -149,7 +176,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy{
 
   state: string;
   orderCreate(id: string) {
-    this.order.delivery.requestedDeliveryTime = this.deliveryDate+"T"+this.deliveryTime+":00";
+    this.order.delivery.requestedDeliveryTime = new Date(this.deliveryDate+"T"+this.deliveryTime+":00").toISOString();
 
 
     this.state = id;

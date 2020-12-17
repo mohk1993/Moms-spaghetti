@@ -65,7 +65,7 @@
                         <div class="delivery-section">
                             <div class="header-text">Delivery status</div>
                             <span *ngIf="order.delivery.deliveryStatus == 'delivered'">{{ order.delivery.deliveryStatus | titlecase }}</span>
-                            <button class="btn btn-success" *ngIf="order.delivery.deliveryStatus != 'delivered'">Check Delivery status</button>
+                            <button class="btn btn-success" *ngIf="order.delivery.deliveryStatus != 'delivered'" [routerLink]="['/deliveries/progress']" [queryParams]="{ order_id: orderId }" >Check Delivery status</button>
                         </div>
                         <div class="delivery-section">
                             <div class="header-text">Location</div>

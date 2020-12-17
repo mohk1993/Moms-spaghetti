@@ -56,13 +56,4 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.router.navigate(['/orders/create']);
   }
 
-  cancellation_dialog: boolean = false;
-  confirmation_dialog: boolean = false;
-
-  openCancellation() { this.cancellation_dialog = true; }
-  closeCancellation(e: boolean) { this.cancellation_dialog = false; }
-
-  openConfirmation() { this.confirmation_dialog = true; }
-  closeConfirmation(e: boolean) { this.confirmation_dialog = false; }
-
 }

@@ -64,7 +64,7 @@ export class DeliveryEmployeeComponent implements OnInit, OnDestroy{
   
   statusChange(status: string) {
     this.delivery.deliveryStatus = status;
-    this.deliveryService.putDelivery(this.delivery.id.toString(), this.delivery)
+    this.deliveryService.putDelivery(this.delivery.orderId.toString(), this.delivery)
   }
 
 }

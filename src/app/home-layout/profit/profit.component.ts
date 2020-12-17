@@ -29,7 +29,7 @@ export class ProfitComponent implements OnInit, OnDestroy {
   ]
   line = [
     {
-      "name": "Germany",
+      "name": "Profit",
       series: []
     },
   ];

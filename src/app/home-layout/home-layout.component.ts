@@ -32,6 +32,7 @@ export class HomeLayoutComponent implements OnInit, OnDestroy {
           this.authService.refreshSession(token)
         }, 5 * 60 * 1000);
     } else this.router.navigate(['/login'])
+    
   }
 
   logoutSubscription: Subscription;
