@@ -22,6 +22,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy{
   delivery: Delivery = {
     comment: null,
     createdAt: null,
+    deliveryPrice: null,
     deliveryCompleteTime: null,
     deliveryStatus: null,
     deliveryType: null,
@@ -58,17 +59,7 @@ export class OrderDeliveryComponent implements OnInit, OnDestroy{
 
   }
   postDelivery(){
-      this.deliveryService.postDelivery(
-        this.orderId,
-        this.delivery.comment,
-        this.delivery.createdAt,
-        this.delivery.deliveryCompleteTime,
-        this.delivery.deliveryStatus,
-        this.delivery.deliveryType,
-        this.delivery.location,
-        this.delivery.requestedDeliveryTime,
-        this.delivery.reviewId
-      );
+      this.deliveryService.postDelivery( this.orderId, this.delivery);
   }
 
 }

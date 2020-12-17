@@ -6,6 +6,7 @@ export interface Delivery{
     comment: string,
     location: string,
 
+    deliveryPrice: number,
     deliveryStatus: string,
     deliveryType: string,
 

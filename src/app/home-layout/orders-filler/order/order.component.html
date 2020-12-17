@@ -57,6 +57,27 @@
                             </div>  
                         </div>
                     </div>
+
+                    <div *ngIf="order.delivery && order.delivery.deliveryType == 'delivery' && auth.customer">
+                        <div class="order-comment shadow">
+                            {{ order.delivery.comment | titlecase }}
+                        </div>
+                        <div class="delivery-section">
+                            <div class="header-text">Delivery status</div>
+                            <span *ngIf="order.delivery.deliveryStatus == 'delivered'">{{ order.delivery.deliveryStatus | titlecase }}</span>
+                            <button class="btn btn-success" *ngIf="order.delivery.deliveryStatus != 'delivered'">Check Delivery status</button>
+                        </div>
+                        <div class="delivery-section">
+                            <div class="header-text">Location</div>
+                            {{ order.delivery.location }}
+                        </div>
+                        <div class="delivery-section">
+                            <div class="header-text">Requested delivery time</div>
+                            {{ order.delivery.requestedDeliveryTime | date: 'yyyy/MM/dd HH:mm'}}
+                        </div>
+                    </div>
+
+                    
                     
 
                 </div>

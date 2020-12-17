@@ -48,7 +48,7 @@ createDishImage(id:string, file: File) {
     let image:FormData = new FormData();
     image.append('file', file);
     
-    this.http.post(environment.key + 'dishes/' + id + '/image', image).subscribe({
+    this.http.put(environment.key + 'dishes/' + id + '/image', image).subscribe({
         next: (res) => { this.createDishImageSubject.next(res); },
         error:  (e) => { this.createDishImageSubject.next(e); }
     });

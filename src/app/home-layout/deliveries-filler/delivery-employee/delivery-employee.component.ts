@@ -18,6 +18,7 @@ export class DeliveryEmployeeComponent implements OnInit, OnDestroy{
     comment: null,
     createdAt: null,
     deliveryCompleteTime: null,
+    deliveryPrice: null,
     deliveryStatus: null,
     deliveryType: null,
     id: null,

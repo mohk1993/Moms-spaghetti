@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Delivery } from 'src/app/interfaces/delivery.interface';
 import { Dish } from 'src/app/interfaces/dish.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { Order_dish } from 'src/app/interfaces/order_dish.interface';
@@ -25,7 +26,22 @@ export class OrderComponent implements OnInit, OnDestroy{
     orderNumber: null,
     status: null,
     price: null,
-    delivery:null,
+    delivery: <Delivery>{
+      id: null,
+      orderId: null,
+      reviewId: null,
+  
+      comment: null,
+      location: null,
+  
+      deliveryStatus: null,
+      deliveryType: null,
+  
+      deliveryCompleteTime: null,
+      requestedDeliveryTime: null,
+  
+      createdAt: null,
+    },
     dishes: new Array<Dish>(),
     orderDishes:new Array<Order_dish>(),
     
