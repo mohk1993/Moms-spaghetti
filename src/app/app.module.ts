@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -26,7 +28,7 @@ import { reviewService } from './services/review.service';
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule,
-
+    MatSnackBarModule,
     AppRoutingModule
   ],
   providers: [

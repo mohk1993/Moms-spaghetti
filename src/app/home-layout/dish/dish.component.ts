@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { isNullOrUndefined } from 'util';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 //services 
 import { dishServices } from 'src/app/services/dish.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -26,14 +26,16 @@ export class DishComponent implements OnInit, OnDestroy{
 
   loadingMessage = "Loading Data, Please wait...";
 
-  constructor(private auth:AuthService, private dishService: dishServices, public router: Router) {
+  constructor(private _snackBar: MatSnackBar, private auth:AuthService, private dishService: dishServices, public router: Router) {
     this.dishes = new Array<Dish>();
     this.dishService.getAllDishes();
+
   }
   deleteDish(i:number){
     if(confirm("Are you sure you want to delete " + this.dishes[i].name + "?"))
     this.dishService.deleteDish(this.dishes[i].id.toString());
   }
+  
 
   remove_dish_dialog: boolean = false;
   update_dish_dialog: boolean = false;
@@ -49,6 +51,7 @@ export class DishComponent implements OnInit, OnDestroy{
       next: (res) =>{
         if(!(res.error)){
           this.dishes =res;
+          console.log(res);
         }else {
           console.log(res);
         }
@@ -57,6 +60,9 @@ export class DishComponent implements OnInit, OnDestroy{
 
     this.deleteDishesSubscription = this.dishService.deleteDishesSubject.subscribe({
       next: () =>{
+        this._snackBar.open("Dish was deleteed", null, {
+          duration: 2000,
+        });
           this.dishService.getAllDishes();
       }
     });
